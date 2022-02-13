@@ -25,7 +25,7 @@ export default {
   },
 
   computed: {
-    // `type`に応じてクラスを動的に生成する
+    // `type`に応じてクラスを動的に生成する.
     classes () {
       const cls = this.type === 'text' ? ('-' + this.type) : ''
       return [`kbn-button${cls}`]
