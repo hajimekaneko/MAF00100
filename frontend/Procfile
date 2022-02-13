@@ -1,1 +1,1 @@
-"web: $(basename `pwd`)" 
+web: gunicorn config.wsgi --log-file -
