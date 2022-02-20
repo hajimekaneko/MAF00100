@@ -40,6 +40,10 @@
 
 <style scoped>
     @media (min-width: 768px) {
+        .container{
+            padding-top: 10vh;
+            height:80vh;
+        }
         footer {
             padding: 0;
             height: 50px;
