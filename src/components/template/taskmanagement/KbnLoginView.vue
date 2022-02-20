@@ -33,6 +33,12 @@ export default {
 </script>
 
 <style scoped>
+.login-view{
+  padding-top: 10vh;
+  height:80vh;
+}
+
+
 .login-view {
   width: 320px;
   margin: auto;

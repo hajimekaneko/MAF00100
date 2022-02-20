@@ -23,7 +23,6 @@
         margin: 0;
         padding: 0;
     }
-
     body {
         font-family: fot-tsukuardgothic-std, sans-serif;
         line-height: 1.5;
