@@ -8,6 +8,9 @@
   "browser": {
     "./sfc": "src/my-component.vue"
   },
+  "engines": {
+    "node": "14.17.3"
+  }
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
