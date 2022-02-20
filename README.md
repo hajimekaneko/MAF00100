@@ -1,13 +1,24 @@
-# MAF00100
-FrontEnd
+# frontend
 
-npm install -g @vue/cli
-vue create frontend
-npm install bootstrap-vue
-npm install --save-dev html-webpack-plugin preload-webpack-plugin
-npm install --save axios vuedraggable
+## Project setup
+```
+npm install
+```
 
-vue inspect
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
+### Compiles and minifies for production
+```
+npm run build
+```
 
+### Lints and fixes files
+```
+npm run lint
+```
 
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
