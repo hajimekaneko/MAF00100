@@ -1,22 +1,23 @@
 <template>
-  <main class="row ">
-    <div class="col board-view">
-    <KbnBoardNavigation @logout="handleLogout" />
-    <p
-      v-if="progress"
-      class="progress"
-    >
-      {{ message }}
-    </p>
-    <KbnBoardTask :lists="lists" />
-    <!-- タスク詳細モーダル表示用プレースホルダ -->
-    <router-view />
-    </div>
-  </main>
+    <main class="row ">
+      <div class="col board-view">
+      <KbnBoardNavigation @logout="handleLogout" />
+      <p
+        v-if="progress"
+        class="progress"
+      >
+        {{ message }}
+      </p>
+      <KbnBoardTask :lists="lists" />
+      <!-- タスク詳細モーダル表示用プレースホルダ -->
+      <router-view />
+      </div>
+    </main>
 </template>
 
 <script>
 // import api from "@/services/api"; //apiに統合する
+
 import { mapState } from 'vuex'
 import KbnBoardNavigation from '@/components/molecules/KbnBoardNavigation.vue'
 import KbnBoardTask from '@/components/organisms/KbnBoardTask.vue'

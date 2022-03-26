@@ -1,18 +1,14 @@
 <template>
     <div class="container" id="contaapp">
-        <Header/>
         <router-view/>
-        <Footer/>
     </div>
 </template>
 
 <script>
-    import Header from "@/components/organisms/Header"
-    import Footer from "@/components/organisms/Footer"
+
 
     export default {
         name: 'app',
-        components: {Header, Footer},
     }
 </script>
 
