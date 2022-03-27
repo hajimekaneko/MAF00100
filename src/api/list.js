@@ -3,7 +3,7 @@ import client from './client'
 export default {
   fetch: token => {
     return new Promise((resolve, reject) => {
-      client.get('/lists', { headers: { 'x-kbn-token': token } })
+      client.get('/taskmanagement/lists', { headers: { 'x-kbn-token': token } })
         .then(
           response => resolve({ lists: response.data}),
           response => console.log(response.data),         

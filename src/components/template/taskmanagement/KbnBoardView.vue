@@ -61,7 +61,7 @@ export default {
       this.setProgress('読み込み中...')
       // api({
       //   method: "get",
-      //   url: "/lists",
+      //   url: "/taskmanagement/lists",
       // }).then(response => {
       //   console.log(response.data)
       //   this.$store.dispatch('fetchLists', response.data)
