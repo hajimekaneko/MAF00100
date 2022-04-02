@@ -10,6 +10,7 @@ export const authorizeToken = (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) { //メタフィールドに`requiresAuth`が付与されているか確認
     if (!store.state.auth || !store.state.auth.token) { //認証されていない
       next({ path: '/taskmanagement/login' })
+      next({ path: '/taskmanagement' })
     } else {//認証されている
       next()
     }

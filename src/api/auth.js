@@ -5,7 +5,8 @@ export default {
     return new Promise((resolve, reject) => {
       console.log(authInfo)
       client.post('/main/login/', authInfo)
-        .then(response => resolve({ token: response.data.token, userId: response.data.userId }))
+        .then(response => resolve({ token: response.data.email, userId: response.data.userId }))
+        .then(response => console.log(response))
         .catch(err => {
           reject(new Error(err.response.data.message || err.message))
         })

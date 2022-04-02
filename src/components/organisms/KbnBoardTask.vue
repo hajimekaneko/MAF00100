@@ -3,7 +3,7 @@
     <ul class="row board-tasks">
       <li class="col"
         v-for="list in lists"
-        :key="list.listId"
+        :key="list.ListId"
       >
       <KbnTaskList v-bind="list" :list="list" />
       </li>

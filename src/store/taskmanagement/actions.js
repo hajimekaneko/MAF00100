@@ -55,13 +55,13 @@ export default {
       .catch(err => { throw err })
   },
 
-  moveTaskFrom: ({ commit }, { taskId, listId }) => {
-    commit(types.MOVE_TASK_FROM, { targetId: taskId, from: listId })
+  moveTaskFrom: ({ commit }, { taskId, ListId }) => {
+    commit(types.MOVE_TASK_FROM, { targetId: taskId, from: ListId })
     return Promise.resolve()
   },
 
-  moveToTask: ({ commit }, { taskId, listId, tolist }) => {
-    commit(types.MOVE_TO_TASK, { targetId: taskId, to: listId, tolist: tolist })
+  moveToTask: ({ commit }, { taskId, ListId, tolist }) => {
+    commit(types.MOVE_TO_TASK, { targetId: taskId, to: ListId, tolist: tolist })
     return Promise.resolve()
   },
 

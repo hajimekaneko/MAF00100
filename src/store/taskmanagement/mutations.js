@@ -13,7 +13,7 @@ export default {
     const task = payload
     for (let i = 0; i < state.board.lists.length; i++) {
       const list = state.board.lists[i]
-      if (list.listId === task.list.listId) {
+      if (list.ListId === task.list.ListId) {
         list.tasks.push(task)
         break
       }
@@ -25,7 +25,7 @@ export default {
     
     for (let i = 0; i < state.board.lists.length; i++) {
       const list = state.board.lists[i]
-      if (list.listId !== task.list.listId) { continue }    
+      if (list.ListId !== task.list.ListId) { continue }    
       for (let j = 0; j < list.tasks.length; j++) {
         const item = list.tasks[j]      
         if (item.taskId === task.taskId) {
@@ -41,7 +41,7 @@ export default {
     const { taskId, list} = payload
     for (let i = 0; i < state.board.lists.length; i++) {
       const newlist = state.board.lists[i]
-      if (newlist.listId !== list.listId) { continue }
+      if (newlist.ListId !== list.ListId) { continue }
       newlist.tasks = newlist.tasks.filter(task => task.taskId !== taskId)
     }
   },
@@ -66,7 +66,7 @@ export default {
   [types.MOVE_TASK_DONE] (state, payload) {
     const { target, from, to } = payload
     
-    const getTaskList = (lists, id) => lists.find(list => list.listId === id)
+    const getTaskList = (lists, id) => lists.find(list => list.ListId === id)
     // ドラッグ&ドロップ処理のための状態をリセット
     state.dragging.target = null
     state.dragging.from = null
@@ -79,7 +79,7 @@ export default {
     fromTaskList.tasks.splice(index, 1)
 
     // 移動先のタスクリストIDに変更
-    task.listId = to
+    task.ListId = to
 
     // 移動先にタスクリストに対象タスクを格納
     const toTaskList = getTaskList(state.board.lists, to)

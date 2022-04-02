@@ -49,7 +49,7 @@ export default {
   },
 
   props: {
-    listId: {
+    ListId: {
       type: Number,
       required: true
     },
@@ -106,13 +106,13 @@ export default {
       if (added) {
         return this.$store.dispatch('moveToTask', {
           taskId: added.element.taskId,
-          listId: this.listId,
+          ListId: this.ListId,
           tolist: this.list
         }).catch(err => Promise.reject(err))
       } else if (removed) {
         return this.$store.dispatch('moveTaskFrom', {
           taskId: removed.element.taskId,
-          listId: this.listId
+          ListId: this.ListId
         }).catch(err => Promise.reject(err))
       }
     },
