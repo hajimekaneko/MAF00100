@@ -1,15 +1,7 @@
 <template>
   <div class="task-list">
-    <TMMainGroup
+    <TMMainTMP
       :name="TaskGroup_name"
-      @add="shown = true"
-    />
-    <TMMainGroup
-      :name="Task_name"
-      @add="shown = true"
-    />
-    <TMMainGroup
-      :name="List_name"
       @add="shown = true"
     />
     <ul class="task-list-items">
@@ -40,17 +32,17 @@
 </template>
 
 <script>
-import TMMainGroup from '@/components/molecules/TMMainGroup.vue'
+import TMMainTMP from '@/components/molecules/TMMainTMP.vue'
 import KbnTaskCard from '@/components/molecules/KbnTaskCard.vue'
 import KbnTaskForm from '@/components/molecules/KbnTaskForm.vue'
 import { mapState } from 'vuex'
 import draggable from 'vuedraggable'
 
 export default {
-  name: 'TMMainList',
+  name: 'TMMainGroup',
 
   components: {
-    TMMainGroup,
+    TMMainTMP,
     KbnTaskCard,
     KbnTaskForm,
     draggable

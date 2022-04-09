@@ -2,29 +2,29 @@
   <div class="board-main ">
     <ul class="row board-tasks">
       <li class="col-12"
-        v-for="task_group in task_groups"
-        :key="task_group.TaskGroupId"
+        v-for="task in task_group.Task"
+        :key="task.TaskId"
       >
-      <!-- <TMMainTMP v-bind="list" :list="list" /> -->
-      <!-- <TMMainTMP v-bind="list" /> -->
-      <TMMainTMP v-bind:name="task_group.TaskGroup_name"/>
+      <!-- <TMMainGroup v-bind="list" :list="list" /> -->
+      <!-- <TMMainGroup v-bind="list" /> -->
+      <TMMainGroup v-bind="task"/>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import TMMainTMP from '@/components/molecules/TMMainTMP.vue'
+import TMMainGroup from '@/components/organisms/TMMainGroup.vue'
 
 export default {
   name: 'TMMainView',
 
   components: {
-    TMMainTMP
+    TMMainGroup
   },
 
   props: {
-    task_groups: {
+    task_group: {
       type: Array,
       default: () => []
     }

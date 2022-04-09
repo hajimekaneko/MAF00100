@@ -13,7 +13,7 @@
       </div>
       <div class="col-6 board-view">
 
-      <TMMainView :lists="lists" />
+      <TMMainView :task_groups="task_groups" />
       <!-- タスク詳細モーダル表示用プレースホルダ -->
       <router-view />
       </div>
@@ -44,7 +44,7 @@ export default {
   },
 
   computed: mapState({
-    lists: state => state.board.lists
+    task_groups: state => state.board.lists
   }),
 
   created () {
