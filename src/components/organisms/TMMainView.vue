@@ -5,20 +5,22 @@
         v-for="list in lists"
         :key="list.ListId"
       >
-      <KbnTaskList v-bind="list" :list="list" />
+      <!-- <TMMainList v-bind="list" :list="list" /> -->
+      <!-- <TMMainList v-bind="list" /> -->
+      <TMMainList v-bind="list" v-bind:TaskGroup_name="list.Task.TaskGroup.TaskGroup_name" v-bind:Task_name="list.Task.Task_name"/>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import KbnTaskList from '@/components/organisms/KbnTaskList.vue'
+import TMMainList from '@/components/organisms/TMMainList.vue'
 
 export default {
-  name: 'KbnBoardTask',
+  name: 'TMMainView',
 
   components: {
-    KbnTaskList
+    TMMainList
   },
 
   props: {

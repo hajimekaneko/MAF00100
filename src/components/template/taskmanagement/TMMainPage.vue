@@ -13,7 +13,7 @@
       </div>
       <div class="col-6 board-view">
 
-      <KbnBoardTask :lists="lists" />
+      <TMMainView :lists="lists" />
       <!-- タスク詳細モーダル表示用プレースホルダ -->
       <router-view />
       </div>
@@ -25,13 +25,13 @@
 
 import { mapState } from 'vuex'
 import TMNavigation from '@/components/molecules/TMNavigation.vue'
-import KbnBoardTask from '@/components/organisms/KbnBoardTask.vue'
+import TMMainView from '@/components/organisms/TMMainView.vue'
 
 export default {
-  name: 'KbnBoardView',
+  name: 'TMMainPage',
 
   components: {
-    KbnBoardTask,
+    TMMainView,
     TMNavigation
   },
 
@@ -64,18 +64,6 @@ export default {
 
     loadLists () {
       this.setProgress('読み込み中...')
-      // api({
-      //   method: "get",
-      //   url: "/taskmanagement/lists",
-      // }).then(response => {
-      //   console.log(response.data)
-      //   this.$store.dispatch('fetchLists', response.data)
-      //   .catch(err => Promise.reject(err))
-      //   .then(() => {
-      //     this.resetProgress()
-      //   })
-      // })
-      // .catch(err => { throw err })
       this.$store.dispatch('fetchLists')
         .catch(err => Promise.reject(err))
         .then(() => {

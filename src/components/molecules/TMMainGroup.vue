@@ -19,7 +19,7 @@ import KbnButton from '@/components/atoms/KbnButton.vue'
 import KbnIcon from '@/components/atoms/KbnIcon.vue'
 
 export default {
-  name: 'KbnTaskListHeader',
+  name: 'TMMainGroup',
 
   components: {
     KbnButton,
