@@ -1,7 +1,7 @@
 <template> 
   <div class="board-main ">
     <ul class="row board-tasks">
-      <li class="col"
+      <li class="col-12"
         v-for="list in lists"
         :key="list.ListId"
       >

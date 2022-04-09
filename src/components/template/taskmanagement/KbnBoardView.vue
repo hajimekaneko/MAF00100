@@ -1,13 +1,18 @@
 <template>
-    <main class="row ">
-      <div class="col board-view">
-      <KbnBoardNavigation @logout="handleLogout" />
-      <p
+    <main class="row">
+      <div class="col-1 nav-view">
+      <TMNavigation @logout="handleLogout" />
+            <p
         v-if="progress"
         class="progress"
       >
         {{ message }}
       </p>
+      </div>
+       <div class="col-2">
+      </div>
+      <div class="col-6 board-view">
+
       <KbnBoardTask :lists="lists" />
       <!-- タスク詳細モーダル表示用プレースホルダ -->
       <router-view />
@@ -19,15 +24,15 @@
 // import api from "@/services/api"; //apiに統合する
 
 import { mapState } from 'vuex'
-import KbnBoardNavigation from '@/components/molecules/KbnBoardNavigation.vue'
+import TMNavigation from '@/components/molecules/TMNavigation.vue'
 import KbnBoardTask from '@/components/organisms/KbnBoardTask.vue'
 
 export default {
   name: 'KbnBoardView',
 
   components: {
-    KbnBoardNavigation,
-    KbnBoardTask
+    KbnBoardTask,
+    TMNavigation
   },
 
   data () {
@@ -97,12 +102,22 @@ export default {
 <style scoped>
 
 main{
-  padding-top: 10vh;
+
 }
-.board-view {
-  height:80vh;
+.board-view{
   border: medium solid black;
+  background-color: #f1f1f1;
+  padding-top: 1vh;
+  height: 99vh;
 }
+
+.nav-view {
+  height: 100vh;
+  background-color: #D3B48C;
+  /* border: medium solid black; */
+}
+
+
 .progress {
   margin: auto;
 }

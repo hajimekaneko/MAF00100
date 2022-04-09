@@ -1,5 +1,5 @@
 <template>
-    <div class="container" id="contaapp">
+    <div class="container-fluid" id="contaapp">
         <router-view/>
     </div>
 </template>
@@ -24,14 +24,15 @@
         font-size: 14px;
     }
 
-    .container {
+    .container-fluid {
         width: 100%;
-        padding: 0 20px;
-        box-sizing: border-box;
+        /* padding: 0 20px; */
+        /* box-sizing: border-bo    x; */
+        background-color: #FFEFDF;
     }
 
     @media (min-width: 768px) {
-        .container {
+        .container-fluid {
             width: 700px;
             padding: 0;
             margin: 0 auto;
@@ -39,7 +40,7 @@
     }
 
     @media (min-width: 1024px) {
-        .container {
+        .container-fluid {
             width: 980px;
         }
     }
