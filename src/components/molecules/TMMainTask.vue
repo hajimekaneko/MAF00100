@@ -1,34 +1,37 @@
 <template> 
   <div class="board-main ">
+    <TMMainTMP v-bind:name="Task_name"/>
     <ul class="row board-tasks">
       <li class="col-12"
-        v-for="task_group in task_groups"
-        :key="task_group.TaskGroupId"
+        v-for="list in lists"
+        :key="list.LitId"
       >
-      <!-- <TMMainTMP v-bind:tasks="task_group" v-bind:name="task_group.TaskGroup_name"/> -->
-      <TMMainGroup v-bind:tasks="task_group.Task" v-bind:TaskGroup_name="task_group.TaskGroup_name"/>
-      
+      <TMMainList  v-bind:List_name="list.List_name"/>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import TMMainGroup from '@/components/molecules/TMMainGroup.vue'
-// import TMMainTMP from '@/components/molecules/TMMainTMP.vue'
+import TMMainTMP from '@/components/molecules/TMMainTMP.vue'
+import TMMainList from '@/components/molecules/TMMainList.vue'
 
 export default {
   name: 'TMMainView',
 
   components: {
-    TMMainGroup,
-    // TMMainTMP
+    TMMainTMP,
+    TMMainList
   },
 
   props: {
-    task_groups: {
+    lists: {
       type: Array,
-      default: () => []
+      required: true
+    },
+    Task_name: {
+      type: String,
+      required: true
     }
   }
 }
