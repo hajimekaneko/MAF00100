@@ -1,8 +1,8 @@
 <template> 
   <div class="board-main ">
     <TMMainTMP v-bind:name="Task_name"/>
-    <ul class="row board-tasks">
-      <li class="col-12"
+    <ul class="row">
+      <li class="col-12 "
         v-for="list in lists"
         :key="list.LitId"
       >
@@ -43,14 +43,14 @@ export default {
 }
 ul {
   display: flex;
-  min-height: 65vh;
+  /* min-height: 5vh; */
   list-style-type: none;
   margin: 16px;
   padding: 0;
 }
 ul li {
   width: 192px;
-  margin-right: 8px;
+  /* margin-right: 8px; */
   border: thin solid black;
   border-radius: 0.5em;
 }

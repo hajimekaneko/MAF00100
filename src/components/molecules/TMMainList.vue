@@ -1,9 +1,10 @@
 <template>
   <div class="task-list">
-    <TMMainTMP
+    <h6>{{ List_name }}</h6>
+    <!-- <TMMainTMP
       v-bind:name="List_name"
       @add="shown = true"
-    />
+    /> -->
     <!-- <ul class="task-list-items"> -->
       <!-- <draggable
         v-model="draggableItems"
@@ -32,7 +33,7 @@
 </template>
 
 <script>
-import TMMainTMP from '@/components/molecules/TMMainTMP.vue'
+// import TMMainTMP from '@/components/molecules/TMMainTMP.vue'
 // import KbnTaskCard from '@/components/molecules/KbnTaskCard.vue'
 // import KbnTaskForm from '@/components/molecules/KbnTaskForm.vue'
 // import { mapState } from 'vuex'
@@ -42,7 +43,7 @@ export default {
   name: 'TMMainGroup',
 
   components: {
-    TMMainTMP,
+    // TMMainTMP,
     // KbnTaskCard,
     // KbnTaskForm,
     // draggable
@@ -128,15 +129,5 @@ export default {
 </script>
 
 <style scoped>
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-ul li {
-  margin: 8px;
-  padding: 4px;
-  border: thin solid black;
-  border-radius: 0.5em;
-}
+
 </style>

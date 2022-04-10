@@ -2,7 +2,7 @@
   <div class="board-main ">
     <TMMainTMP v-bind:name="TaskGroup_name"/>
 
-    <ul class="row board-tasks">
+    <ul class="row ">
       <li class="col-12"
         v-for="task in tasks"
         :key="task.TaskId"
@@ -44,14 +44,14 @@ export default {
 }
 ul {
   display: flex;
-  min-height: 65vh;
+  /* min-height: 5vh; */
   list-style-type: none;
   margin: 16px;
   padding: 0;
 }
 ul li {
   width: 192px;
-  margin-right: 8px;
+  /* margin-right: 8px; */
   border: thin solid black;
   border-radius: 0.5em;
 }
