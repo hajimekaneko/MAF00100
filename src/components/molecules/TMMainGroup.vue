@@ -1,6 +1,9 @@
 <template> 
   <div class="board-main ">
-    <TMMainTMP :name="TaskGroup_name"/>
+    <TMMainTMP 
+    :name="TaskGroup_name"
+    @decompress="taskgroup_decompress"
+    />
 {{TaskGroup_show_task}}
     <ul v-show="TaskGroup_show_task" class="row ">
       <li class="col-12"
@@ -11,7 +14,7 @@
       :lists="task.List"  
       :Task_name="task.Task_name" 
       :Task_show_list="task.Task_show_list"
-      @decompress="decompress(task)"
+      @task_decompress="task_decompress(task)"
       />
       </li>
     </ul>
@@ -46,11 +49,15 @@ export default {
   },
   methods: {
     // `click`イベントを発行
-    decompress (task) {
-      console.log(task.Task_show_list)
+    task_decompress (task) {
+      // console.log(task.Task_show_list)
       task.Task_show_list = !task.Task_show_list
-      console.log(task.Task_show_list)
+      // console.log(task.Task_show_list)
+    },
+    taskgroup_decompress () {
+      this.$emit('taskgroup_decompress')
     }
+
   }
 }
 </script>
