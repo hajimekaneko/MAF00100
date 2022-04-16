@@ -18,6 +18,19 @@ export default {
   fetchLists: ({ commit, state }) => {
     return List.fetch(state.auth.token)
       .then((response) => {
+        
+        // Group及びTaskに表示、非表示をコントロールするshowを追加
+        for (let i = 0; i < response.lists.length; i++){
+
+          for (let j = 0; j < response.lists[i].Task.length; j++){
+            // Taskへshowを追加
+            response.lists[i].Task[j].Task_show_list=true
+          }
+          // Groupへshowを追加
+          response.lists[i].TaskGroup_show_task=true
+        }
+        console.log(response.lists)
+
         commit(types.FETCH_ALL_TASKLIST, response.lists)
       })
       .catch(err => { throw err })

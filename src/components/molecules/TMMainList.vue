@@ -40,7 +40,7 @@
 // import draggable from 'vuedraggable'
 
 export default {
-  name: 'TMMainGroup',
+  name: 'TMMainList',
 
   components: {
     // TMMainTMP,

@@ -2,18 +2,19 @@
     <main class="row">
       <div class="col-1 nav-view">
       <TMNavigation @logout="handleLogout" />
-            <p
-        v-if="progress"
-        class="progress"
-      >
-        {{ message }}
-      </p>
+            
       </div>
        <div class="col-2">
       </div>
       <div class="col-6 board-view">
 
-      <TMMainView :task_groups="task_groups" />
+      <TMMainView :task_groups="task_groups"/>
+      <p
+        v-if="progress"
+        class="progress"
+      >
+        {{ message }}
+      </p>
       <!-- タスク詳細モーダル表示用プレースホルダ -->
       <router-view />
       </div>
@@ -38,8 +39,7 @@ export default {
   data () {
     return {
       progress: false,
-      message: ''
-
+      message: '',
     }
   },
 

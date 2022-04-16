@@ -10,12 +10,20 @@
       >
         <KbnIcon name="add" />
       </KbnButton>
+      <TMIconBar
+        type="text"
+        @decompress="decompress"
+      >
+      </TMIconBar>
+      
+
     </div>
   </div>
 </template>
 
 <script>
 import KbnButton from '@/components/atoms/KbnButton.vue'
+import TMIconBar from '@/components/atoms/TMIconBar.vue'
 import KbnIcon from '@/components/atoms/KbnIcon.vue'
 
 export default {
@@ -23,7 +31,8 @@ export default {
 
   components: {
     KbnButton,
-    KbnIcon
+    KbnIcon,
+    TMIconBar
   },
 
   props: {
@@ -31,12 +40,20 @@ export default {
       type: String,
       required: true
     }
+  },
+  methods: {
+    // `click`イベントを発行
+    decompress (decompressed) {
+      // console.log("decompress")
+      this.$emit('decompress', decompressed)
+    }
   }
 }
 </script>
 
 <style scoped>
 .task-list-header {
+  background-color: aqua;
   display: flex;
   border-bottom: thin solid black;
 }

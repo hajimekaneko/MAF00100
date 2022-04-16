@@ -7,6 +7,13 @@ import store from '@/store'
 import 'bootstrap/dist/css/bootstrap.css' // add
 import 'bootstrap-vue/dist/bootstrap-vue.css' // add
 
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+library.add(faUserSecret)
+
+Vue.component('fa-icon', FontAwesomeIcon)
+
 Vue.config.productionTip = false
 
 new Vue({

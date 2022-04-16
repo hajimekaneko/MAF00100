@@ -1,7 +1,11 @@
 <template> 
   <div class="board-main ">
-    <TMMainTMP v-bind:name="Task_name"/>
-    <ul class="row">
+    <TMMainTMP 
+    v-bind:name="Task_name"
+    @decompress="decompress($event, Task_name)"
+    />
+    {{Task_show_list}}
+    <ul v-show="Task_show_list" class="row">
       <li class="col-12 "
         v-for="list in lists"
         :key="list.LitId"
@@ -17,13 +21,13 @@ import TMMainTMP from '@/components/molecules/TMMainTMP.vue'
 import TMMainList from '@/components/molecules/TMMainList.vue'
 
 export default {
-  name: 'TMMainView',
+  name: 'TMMainTask',
 
   components: {
     TMMainTMP,
     TMMainList
   },
-
+    
   props: {
     lists: {
       type: Array,
@@ -32,6 +36,19 @@ export default {
     Task_name: {
       type: String,
       required: true
+    },
+    Task_show_list: {
+      type: Boolean,
+      required: true
+    }
+  },
+  methods: {
+    // `click`イベントを発行
+    decompress (decompressed, Task_name) {
+      // console.log(decompressed)
+      // console.log(Task_name)
+      this.$emit('decompress', Task_name)
+      // this.$emit('decompress', decompressed)
     }
   }
 }

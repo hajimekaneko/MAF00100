@@ -1,13 +1,18 @@
 <template> 
   <div class="board-main ">
-    <TMMainTMP v-bind:name="TaskGroup_name"/>
-
-    <ul class="row ">
+    <TMMainTMP :name="TaskGroup_name"/>
+{{TaskGroup_show_task}}
+    <ul v-show="TaskGroup_show_task" class="row ">
       <li class="col-12"
         v-for="task in tasks"
         :key="task.TaskId"
       >
-      <TMMainTask v-bind:lists="task.List"  v-bind:Task_name="task.Task_name"/>
+      <TMMainTask 
+      :lists="task.List"  
+      :Task_name="task.Task_name" 
+      :Task_show_list="task.Task_show_list"
+      @decompress="decompress(task)"
+      />
       </li>
     </ul>
   </div>
@@ -18,7 +23,7 @@ import TMMainTMP from '@/components/molecules/TMMainTMP.vue'
 import TMMainTask from '@/components/molecules/TMMainTask.vue'
 
 export default {
-  name: 'TMMainView',
+  name: 'TMMainGroup',
 
   components: {
     TMMainTMP,
@@ -33,6 +38,18 @@ export default {
     TaskGroup_name: {
       type: String,
       required: true
+    },
+    TaskGroup_show_task: {
+      type: Boolean,
+      required: true
+    }
+  },
+  methods: {
+    // `click`イベントを発行
+    decompress (task) {
+      console.log(task.Task_show_list)
+      task.Task_show_list = !task.Task_show_list
+      console.log(task.Task_show_list)
     }
   }
 }

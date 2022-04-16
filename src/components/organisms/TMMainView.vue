@@ -5,7 +5,7 @@
         v-for="task_group in task_groups"
         :key="task_group.TaskGroupId"
       >
-      <TMMainGroup  v-bind:tasks="task_group.Task" v-bind:TaskGroup_name="task_group.TaskGroup_name"/>
+      <TMMainGroup  :tasks="task_group.Task" :TaskGroup_name="task_group.TaskGroup_name" :TaskGroup_show_task="task_group.TaskGroup_show_task"/>
       
       </li>
     </ul>

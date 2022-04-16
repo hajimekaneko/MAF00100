@@ -1,24 +1,25 @@
 <template>
   <button
     :class="classes"
-    : ="disabled"
+    :decompressed="decompressed"
     type="button"
-    @click="handleClick"
+    @click="handleClick(decompressed)"
   >
+  <fa-icon icon="bars" size="lg"></fa-icon>
     <slot />
   </button>
 </template>
 
 <script>
 export default {
-  name: 'KbnButton',
+  name: 'TMIconBar',
 
   props: {
     type: {
-      type: String,
+      type: String, 
       default: 'button'
     },
-    disabled: {
+    decompressed: {
       type: Boolean,
       default: false
     }
@@ -34,8 +35,11 @@ export default {
 
   methods: {
     // `click`イベントを発行
-    handleClick (ev) {
-      this.$emit('click', ev)
+    handleClick (decompressed) {
+      // console.log(decompressed)
+      this.$emit('decompress', decompressed)
+      decompressed = !decompressed
+      // console.log(decompressed)
     }
   }
 }
