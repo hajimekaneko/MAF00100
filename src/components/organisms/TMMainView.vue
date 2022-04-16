@@ -2,15 +2,15 @@
   <div class="board-main ">
     <ul class="row">
       <li class="col-12"
-        v-for="(task_group, task_index) in task_groups"
+        v-for="(task_group, Task_index) in task_groups"
         :key="task_group.TaskGroupId"
       >
       <TMMainGroup
       :tasks="task_group.Task" 
       :TaskGroup_name="task_group.TaskGroup_name" 
       :TaskGroup_show_task="task_group.TaskGroup_show_task"
-      :TaskGroup_index = "task_index"
-      @taskgroup_decompress="taskgroup_decompress(task_group, task_index)"
+      :TaskGroup_index = "Task_index"
+      @taskgroup_decompress="taskgroup_decompress(task_group, Task_index)"
       />
       
       </li>
@@ -44,10 +44,10 @@ export default {
   },
   methods: {
     // `click`イベントを発行
-    taskgroup_decompress (task_group, task_index) {
+    taskgroup_decompress (task_group, Task_index) {
       console.log(this.$store.state)
       console.log(task_group.TaskGroup_show_task)
-      this.$store.dispatch('showtasks',task_index)
+      this.$store.dispatch('showtasks',Task_index)
         // vuexをしようする
       // this.$store.state.board.lists[index].TaskGroup_show_task = !this.$store.state.board.lists[index].TaskGroup_show_task
       console.log(task_group.TaskGroup_show_task)

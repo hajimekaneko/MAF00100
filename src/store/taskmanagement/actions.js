@@ -5,14 +5,14 @@ import { Auth, List, Task } from '@/api'
 
 export default {
 
-  showtasks:({commit}, task_index) => {
-    commit(types.SHOWTASKS, task_index)
+  showtasks:({commit}, Task_index) => {
+    commit(types.SHOWTASKS, Task_index)
   },
 
-  showlists:({commit}, {task_index, TaskGroup_index}) => {
+  showlists:({commit}, {Task_index, TaskGroup_index}) => {
     console.log(TaskGroup_index)
-    console.log(task_index)
-    commit(types.SHOWLISTS, {task_index, TaskGroup_index})
+    console.log(Task_index)
+    commit(types.SHOWLISTS, {Task_index, TaskGroup_index})
   },
 
 
