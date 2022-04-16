@@ -5,7 +5,12 @@
         v-for="task_group in task_groups"
         :key="task_group.TaskGroupId"
       >
-      <TMMainGroup  :tasks="task_group.Task" :TaskGroup_name="task_group.TaskGroup_name" :TaskGroup_show_task="task_group.TaskGroup_show_task"/>
+      <TMMainGroup
+      :tasks="task_group.Task" 
+      :TaskGroup_name="task_group.TaskGroup_name" 
+      :TaskGroup_show_task="task_group.TaskGroup_show_task"
+      @taskgroup_decompress="taskgroup_decompress(task_group)"
+      />
       
       </li>
     </ul>
@@ -26,6 +31,14 @@ export default {
     task_groups: {
       type: Array,
       default: () => []
+    }
+  },
+  methods: {
+    // `click`イベントを発行
+    taskgroup_decompress (task_group) {
+      console.log(task_group.TaskGroup_show_task)
+      task_group.TaskGroup_show_task = !task_group.TaskGroup_show_task
+      console.log(task_group.TaskGroup_show_task)
     }
   }
 }

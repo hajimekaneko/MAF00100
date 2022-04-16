@@ -35,11 +35,8 @@ export default {
 
   methods: {
     // `click`イベントを発行
-    handleClick (decompressed) {
-      // console.log(decompressed)
-      this.$emit('decompress', decompressed)
-      decompressed = !decompressed
-      // console.log(decompressed)
+    handleClick () {
+      this.$emit('decompress')
     }
   }
 }

@@ -43,9 +43,8 @@ export default {
   },
   methods: {
     // `click`イベントを発行
-    decompress (decompressed) {
-      // console.log("decompress")
-      this.$emit('decompress', decompressed)
+    decompress () {
+      this.$emit('decompress')
     }
   }
 }

@@ -1,8 +1,8 @@
 <template> 
   <div class="board-main ">
     <TMMainTMP 
-    v-bind:name="Task_name"
-    @decompress="decompress($event, Task_name)"
+    :name="Task_name"
+    @decompress="task_decompress"
     />
     {{Task_show_list}}
     <ul v-show="Task_show_list" class="row">
@@ -44,11 +44,8 @@ export default {
   },
   methods: {
     // `click`イベントを発行
-    decompress (decompressed, Task_name) {
-      // console.log(decompressed)
-      // console.log(Task_name)
-      this.$emit('decompress', Task_name)
-      // this.$emit('decompress', decompressed)
+    task_decompress () {
+      this.$emit('task_decompress')
     }
   }
 }
