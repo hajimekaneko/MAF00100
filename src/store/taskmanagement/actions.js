@@ -4,6 +4,18 @@ import { Auth, List, Task } from '@/api'
 
 
 export default {
+
+  showtasks:({commit}, task_index) => {
+    commit(types.SHOWTASKS, task_index)
+  },
+
+  showlists:({commit}, {task_index, TaskGroup_index}) => {
+    console.log(TaskGroup_index)
+    console.log(task_index)
+    commit(types.SHOWLISTS, {task_index, TaskGroup_index})
+  },
+
+
   login: ({ commit }, authInfo) => {
     return Auth.login(authInfo)
       .then(({ token, userId }) => {
@@ -14,11 +26,11 @@ export default {
         err => { throw err }
         )
   },
+  
 
   fetchLists: ({ commit, state }) => {
     return List.fetch(state.auth.token)
       .then((response) => {
-        
         // Group及びTaskに表示、非表示をコントロールするshowを追加
         for (let i = 0; i < response.lists.length; i++){
 
@@ -35,6 +47,9 @@ export default {
       })
       .catch(err => { throw err })
   },
+
+
+  
 
   // fetchTasks: ({ commit, state }) => {
   //   return Task.fetch(state.auth.token)

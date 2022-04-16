@@ -7,14 +7,14 @@
 {{TaskGroup_show_task}}
     <ul v-show="TaskGroup_show_task" class="row ">
       <li class="col-12"
-        v-for="task in tasks"
+        v-for="(task, task_index) in tasks"
         :key="task.TaskId"
       >
       <TMMainTask 
       :lists="task.List"  
       :Task_name="task.Task_name" 
       :Task_show_list="task.Task_show_list"
-      @task_decompress="task_decompress(task)"
+      @task_decompress="task_decompress(task_index, TaskGroup_index)"
       />
       </li>
     </ul>
@@ -45,14 +45,17 @@ export default {
     TaskGroup_show_task: {
       type: Boolean,
       required: true
+    },
+    TaskGroup_index: {
+      type: Number,
+      required: true
     }
   },
   methods: {
     // `click`イベントを発行
-    task_decompress (task) {
-      // console.log(task.Task_show_list)
-      task.Task_show_list = !task.Task_show_list
-      // console.log(task.Task_show_list)
+    task_decompress (task_index, TaskGroup_index) {
+
+      this.$store.dispatch('showlists',{task_index,TaskGroup_index})
     },
     taskgroup_decompress () {
       this.$emit('taskgroup_decompress')

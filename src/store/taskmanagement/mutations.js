@@ -1,6 +1,12 @@
 import * as types from './mutation-types'
 
 export default {
+  [types.SHOWTASKS] (state, task_index) {
+    state.board.lists[task_index].TaskGroup_show_task = !state.board.lists[task_index].TaskGroup_show_task
+  },
+  [types.SHOWLISTS] (state, {task_index, TaskGroup_index}) {
+    state.board.lists[TaskGroup_index].Task[task_index].Task_show_list=!state.board.lists[TaskGroup_index].Task[task_index].Task_show_list
+  },
   [types.AUTH_LOGIN] (state, payload) {
     state.auth = payload
   },
