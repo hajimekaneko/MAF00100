@@ -4,11 +4,15 @@
       <TMNavigation @logout="handleLogout" />
             
       </div>
-       <div class="col-2">
+       <div :class="[addContent ? 'col-1' : 'col-2']">
       </div>
-      <div class="col-6 board-view">
+      <div class="board-view"
+      :class="[addContent ? 'col-5' : 'col-6']">
 
-      <TMMainView :task_groups="task_groups"/>
+      <TMMainView 
+      :task_groups="task_groups"
+      @taskgroup_addTask="taskgroup_addTask"
+      />
       <p
         v-if="progress"
         class="progress"
@@ -17,6 +21,11 @@
       </p>
       <!-- タスク詳細モーダル表示用プレースホルダ -->
       <router-view />
+      </div>
+      <div class="col-4 aaa"
+      v-if="addContent">
+      <TMAddTaskView      />
+
       </div>
     </main>
 </template>
@@ -27,19 +36,22 @@
 import { mapState } from 'vuex'
 import TMNavigation from '@/components/molecules/TMNavigation.vue'
 import TMMainView from '@/components/organisms/TMMainView.vue'
+import TMAddTaskView from '@/components/organisms/TMAddTaskView.vue'
 
 export default {
   name: 'TMMainPage',
 
   components: {
     TMMainView,
-    TMNavigation
+    TMNavigation,
+    TMAddTaskView
   },
 
   data () {
     return {
       progress: false,
       message: '',
+      addContent: true
     }
   },
 
@@ -55,6 +67,9 @@ export default {
     setProgress (message) {
       this.progress = true
       this.message = message
+    },
+    taskgroup_addTask(){
+      this.addContent = !this.addContent
     },
 
     resetProgress () {
@@ -92,6 +107,12 @@ export default {
 main{
 
 }
+
+.aaa{
+  border: medium solid black;
+  background-color: #f1f1f1;
+}
+
 .board-view{
   border: medium solid black;
   background-color: #f1f1f1;

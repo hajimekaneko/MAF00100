@@ -4,12 +4,17 @@
       <h2>{{ name }}</h2>
     </div>
     <div class="actions">
-      <KbnButton
+      <!-- <KbnButton
         type="text"
         @click="$emit('add')"
       >
         <KbnIcon name="add" />
-      </KbnButton>
+      </KbnButton> -->
+      <TMIconAdd
+        type="text"
+        @addContent="addContent"
+      >
+      </TMIconAdd>
       <TMIconBar
         type="text"
         @decompress="decompress"
@@ -22,16 +27,19 @@
 </template>
 
 <script>
-import KbnButton from '@/components/atoms/KbnButton.vue'
+// import KbnButton from '@/components/atoms/KbnButton.vue'
+// import KbnIcon from '@/components/atoms/KbnIcon.vue'
 import TMIconBar from '@/components/atoms/TMIconBar.vue'
-import KbnIcon from '@/components/atoms/KbnIcon.vue'
+import TMIconAdd from '@/components/atoms/TMIconAdd.vue'
+
 
 export default {
   name: 'TMMainGroup',
 
   components: {
-    KbnButton,
-    KbnIcon,
+    // KbnButton,
+    // KbnIcon,
+    TMIconAdd,
     TMIconBar
   },
 
@@ -45,6 +53,9 @@ export default {
     // `click`イベントを発行
     decompress () {
       this.$emit('decompress')
+    },
+    addContent() {
+      this.$emit('addContent')
     }
   }
 }
@@ -52,7 +63,8 @@ export default {
 
 <style scoped>
 .task-list-header {
-  background-color: aqua;
+  margin: 0px, -10px;
+  background-color: rgb(225, 225, 225);
   display: flex;
   border-bottom: thin solid black;
 }

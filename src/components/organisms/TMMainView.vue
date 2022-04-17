@@ -1,20 +1,23 @@
 <template> 
-  <div class="board-main ">
+  <div class="board-main row">
+    <div class="col">
     <ul class="row">
-      <li class="col-12"
-        v-for="(task_group, Task_index) in task_groups"
+      <li class="col-12 my-2"
+        v-for="(task_group, TaskGroup_index) in task_groups"
         :key="task_group.TaskGroupId"
       >
       <TMMainGroup
       :tasks="task_group.Task" 
       :TaskGroup_name="task_group.TaskGroup_name" 
       :TaskGroup_show_task="task_group.TaskGroup_show_task"
-      :TaskGroup_index = "Task_index"
-      @taskgroup_decompress="taskgroup_decompress(task_group, Task_index)"
+      :TaskGroup_index="TaskGroup_index"
+      @taskgroup_decompress="taskgroup_decompress(TaskGroup_index)"
+      @taskgroup_addTask="taskgroup_addTask(task_group.TaskGroupId, task_group.Task)"
       />
       
       </li>
     </ul>
+    </div>
   </div>
 </template>
 
@@ -44,13 +47,12 @@ export default {
   },
   methods: {
     // `click`イベントを発行
-    taskgroup_decompress (task_group, Task_index) {
-      console.log(this.$store.state)
-      console.log(task_group.TaskGroup_show_task)
-      this.$store.dispatch('showtasks',Task_index)
-        // vuexをしようする
-      // this.$store.state.board.lists[index].TaskGroup_show_task = !this.$store.state.board.lists[index].TaskGroup_show_task
-      console.log(task_group.TaskGroup_show_task)
+    taskgroup_decompress (TaskGroup_index) {
+      this.$store.dispatch('showtasks',TaskGroup_index)
+    },
+    taskgroup_addTask(TaskGroupId, Task) {
+      this.$emit('taskgroup_addTask')
+      this.$store.dispatch('addTask', {TaskGroupId, Task})
     }
   }
 }

@@ -1,12 +1,14 @@
 <template> 
-  <div class="board-main ">
+  <div class="group-main row">   
+    <div class="col px-2">
     <TMMainTMP 
     :name="TaskGroup_name"
     @decompress="taskgroup_decompress"
+    @addContent="taskgroup_addTask"
     />
-{{TaskGroup_show_task}}
-    <ul v-show="TaskGroup_show_task" class="row ">
-      <li class="col-12"
+
+    <ul v-show="TaskGroup_show_task" class="row mx-0 my-2">
+      <li class="col-12  my-1"
         v-for="(task, Task_index) in tasks"
         :key="task.TaskId"
       >
@@ -18,6 +20,7 @@
       />
       </li>
     </ul>
+  </div>
   </div>
 </template>
 
@@ -54,11 +57,17 @@ export default {
   methods: {
     // `click`イベントを発行
     task_decompress (Task_index, TaskGroup_index) {
+      console.log(Task_index)
+      console.log(TaskGroup_index)
 
       this.$store.dispatch('showlists',{Task_index,TaskGroup_index})
     },
     taskgroup_decompress () {
       this.$emit('taskgroup_decompress')
+    },
+    taskgroup_addTask(){
+      this.$emit('taskgroup_addTask')
+
     }
 
   }

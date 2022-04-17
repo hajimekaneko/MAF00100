@@ -5,6 +5,24 @@ import { Auth, List, Task } from '@/api'
 
 export default {
 
+  addTask:({commit, state}, {TaskGroupId, Task}) => {
+    console.log(TaskGroupId)
+    console.log(Task)
+    console.log(commit)
+    console.log(state)
+
+    // var new_content = 
+    // {
+
+    // }
+
+    // return Task.add(state.auth.token, { list, description, name })
+    //   .then((task) => {
+    //     commit(types.ADD_TASK, task)
+    //   })
+    //   .catch(err => { throw err })
+  },
+    
   showtasks:({commit}, Task_index) => {
     commit(types.SHOWTASKS, Task_index)
   },
@@ -49,17 +67,7 @@ export default {
   },
 
 
-  
-
-  // fetchTasks: ({ commit, state }) => {
-  //   return Task.fetch(state.auth.token)
-  //     .then((response) => {
-  //       commit(types.FETCH_ALL_LISTLIST, response.tasks)
-  //     })
-  //     .catch(err => { throw err })
-  // },
-
-  addTask: ({ commit, state }, { name, description, list }) => {
+  addTask_: ({ commit, state }, { name, description, list }) => {
     return Task.add(state.auth.token, { list, description, name })
       .then((task) => {
         commit(types.ADD_TASK, task)

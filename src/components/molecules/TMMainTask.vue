@@ -1,18 +1,19 @@
 <template> 
-  <div class="board-main ">
-    <TMMainTMP 
-    :name="Task_name"
-    @decompress="task_decompress"
-    />
-    {{Task_show_list}}
-    <ul v-show="Task_show_list" class="row">
-      <li class="col-12 "
-        v-for="list in lists"
-        :key="list.LitId"
-      >
-      <TMMainList  v-bind:List_name="list.List_name"/>
-      </li>
-    </ul>
+  <div class="task-main row px-2">
+    <div class="col">
+      <TMMainTMP 
+      :name="Task_name"
+      @decompress="task_decompress"
+      />
+      <ul v-show="Task_show_list" class="row">
+        <li class="col-12"
+          v-for="list in lists"
+          :key="list.LitId"
+        >
+        <TMMainList  v-bind:List_name="list.List_name"/>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 

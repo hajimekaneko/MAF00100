@@ -1,3 +1,4 @@
+export const ADDGROUP = 'ADDGROUP'
 export const SHOWTASKS = 'SHOWTASKS'
 export const SHOWLISTS = 'SHOWLISTS'
 export const AUTH_LOGIN = 'AUTH_LOGIN'

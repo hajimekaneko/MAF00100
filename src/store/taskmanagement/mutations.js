@@ -1,6 +1,14 @@
 import * as types from './mutation-types'
 
 export default {
+
+
+  
+
+  [types.ADDGROUP] (state, Task_index) {
+    // APIでDBに追加しておく
+    console.log(Task_index)
+  },
   [types.SHOWTASKS] (state, Task_index) {
     state.board.lists[Task_index].TaskGroup_show_task = !state.board.lists[Task_index].TaskGroup_show_task
   },
