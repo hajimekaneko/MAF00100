@@ -5,7 +5,7 @@ import KbnLoginView from '@/components/template/taskmanagement/KbnLoginView.vue'
 export default [{
   path: '/taskmanagement',
   component: TMMainPage,
-  meta: { requiresAuth: true },
+  // meta: { requiresAuth: true },  
   children: [{
     path: 'tasks/:taskId',
     component: KbnTaskDetailModal,
