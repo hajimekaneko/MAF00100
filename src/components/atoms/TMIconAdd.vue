@@ -1,26 +1,22 @@
 <template>
   <button
     :class="classes"
-    : ="disabled"
     type="button"
     @click="handleClick"
   >
+  <fa-icon icon="circle-plus" size="lg"></fa-icon>
     <slot />
   </button>
 </template>
 
 <script>
 export default {
-  name: 'KbnButton',
+  name: 'TMIconAdd',
 
   props: {
     type: {
-      type: String,
+      type: String, 
       default: 'button'
-    },
-    disabled: {
-      type: Boolean,
-      default: false
     }
   },
 
@@ -34,8 +30,8 @@ export default {
 
   methods: {
     // `click`イベントを発行
-    handleClick (ev) {
-      this.$emit('click', ev)
+    handleClick () {
+      this.$emit('addContent')
     }
   }
 }
