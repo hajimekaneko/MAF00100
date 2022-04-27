@@ -16,6 +16,8 @@
       :lists="task.List"  
       :Task_name="task.Task_name" 
       :Task_show_list="task.Task_show_list"
+      :Task_index="Task_index"
+      :TaskGroup_index="TaskGroup_index"
       @task_decompress="task_decompress(Task_index, TaskGroup_index)"
       />
       </li>
@@ -67,7 +69,6 @@ export default {
     },
     taskgroup_addTask(){
       this.$emit('taskgroup_addTask')
-
     }
 
   }

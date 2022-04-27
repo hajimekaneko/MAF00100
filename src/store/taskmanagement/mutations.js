@@ -9,8 +9,21 @@ export default {
     // APIでDBに追加しておく
     console.log(Task_index)
   },
-  [types.SHOWTASKS] (state, Task_index) {
-    state.board.lists[Task_index].TaskGroup_show_task = !state.board.lists[Task_index].TaskGroup_show_task
+  [types.EDITLISTNAME] (state, {TaskGroup_index, Task_index, List_index}) {
+    state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_edit_listname = true
+  },
+  [types.EDITEDLISTNAME] (state, {TaskGroup_index, Task_index, List_index}) {
+    state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_edit_listname = false
+  },
+  [types.CHANGELISTNAME] (state, {TaskGroup_index, Task_index, List_index, newlistname}) {
+    console.log({TaskGroup_index, Task_index, List_index, newlistname})
+    state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_edit_listname = false
+    state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_name = newlistname
+
+  },
+  
+  [types.SHOWTASKS] (state, TaskGroup_index) {
+    state.board.lists[TaskGroup_index].TaskGroup_show_task = !state.board.lists[TaskGroup_index].TaskGroup_show_task
   },
   [types.SHOWLISTS] (state, {Task_index, TaskGroup_index}) {
     state.board.lists[TaskGroup_index].Task[Task_index].Task_show_list=!state.board.lists[TaskGroup_index].Task[Task_index].Task_show_list

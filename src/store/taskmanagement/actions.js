@@ -22,14 +22,26 @@ export default {
     //   })
     //   .catch(err => { throw err })
   },
-    
-  showtasks:({commit}, Task_index) => {
-    commit(types.SHOWTASKS, Task_index)
+
+  editlistname:({commit}, {TaskGroup_index, Task_index, List_index}) => {
+    commit(types.EDITLISTNAME, {TaskGroup_index, Task_index, List_index})
+  },
+  editedlistname:({commit}, {TaskGroup_index, Task_index, List_index}) => {
+    commit(types.EDITEDLISTNAME, {TaskGroup_index, Task_index, List_index})
+  },
+  changelistname:({commit, state}, {TaskGroup_index, Task_index, List_index, listID, newlistname}) => {
+    return List.changename(state.auth.token, listID, newlistname)
+    .then(() => {
+      commit(types.CHANGELISTNAME, {TaskGroup_index, Task_index, List_index, newlistname})
+    })
+    .catch(err => { throw err })
+  },
+
+  showtasks:({commit}, TaskGroup_index) => {
+    commit(types.SHOWTASKS, TaskGroup_index)
   },
 
   showlists:({commit}, {Task_index, TaskGroup_index}) => {
-    console.log(TaskGroup_index)
-    console.log(Task_index)
     commit(types.SHOWLISTS, {Task_index, TaskGroup_index})
   },
 
@@ -53,6 +65,10 @@ export default {
         for (let i = 0; i < response.lists.length; i++){
 
           for (let j = 0; j < response.lists[i].Task.length; j++){
+            for (let k = 0; k < response.lists[i].Task[j].List.length; k++){
+              // Listへedit_listnameを追加
+              response.lists[i].Task[j].List[k].List_edit_listname=false
+            }
             // Taskへshowを追加
             response.lists[i].Task[j].Task_show_list=true
           }

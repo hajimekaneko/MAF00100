@@ -1,4 +1,7 @@
 export const ADDGROUP = 'ADDGROUP'
+export const EDITLISTNAME = 'EDITLISTNAME'
+export const EDITEDLISTNAME = 'EDITEDLISTNAME'
+export const CHANGELISTNAME = 'CHANGELISTNAME'
 export const SHOWTASKS = 'SHOWTASKS'
 export const SHOWLISTS = 'SHOWLISTS'
 export const AUTH_LOGIN = 'AUTH_LOGIN'

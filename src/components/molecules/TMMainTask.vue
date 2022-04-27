@@ -9,14 +9,15 @@
         <li class="col-12"
           v-for="(list, index) in lists"
           :key="list.LitId"
-          @click="doEditArray1(list, index)"
+          @click="edit_list_name(TaskGroup_index, Task_index, index)"
         >
-        <TMMainList v-if="!list.valueChecker" v-bind:List_name="list.List_name" />
+        <TMMainList v-if="!list.List_edit_listname" v-bind:List_name="list.List_name" />
+
         <!-- <input v-else type="text" class="form-control" v-model="list.List_name"
-            > -->
-        <input v-else type="text" class="form-control" v-model="list.List_name"
-            @blur="list.valueChecker = false" v-focus>
-        {{list.valueChecker}}
+            @blur="edited_list_name(TaskGroup_index, Task_index, index, list.List_name)" v-focus> -->
+        <input v-else ref="input" type="text" class="form-control" :value="list.List_name"
+            @keyup.enter="edited_list_name($event, TaskGroup_index, Task_index, index, list)"
+            @blur="edited_list_name($event, TaskGroup_index, Task_index, index, list)" v-focus>
         </li>
       </ul>
     </div>
@@ -53,6 +54,14 @@ export default {
     Task_show_list: {
       type: Boolean,
       required: true
+    },
+    TaskGroup_index: {
+      type: Number,
+      required: true
+    },
+    Task_index: {
+      type: Number,
+      required: true
     }
   },
   directives: {
@@ -64,26 +73,51 @@ export default {
     }
   },
   created: function () {
-    for(let i = 0; i < this.lists.length; i++){
-      var val = this.lists[i];
-      //チェック用データを足す
-      console.log("vm")
-      // if (typeof val.List_name != 'undefined' && typeof val.valueChecker == 'undefined'){
-      if (typeof val.List_name != 'undefined'){
-        this.$set(val, 'valueChecker', false);
-      }
-      console.log(val)
-    }
+    // for(let i = 0; i < this.lists.length; i++){
+    //   var val = this.lists[i];
+    //   //チェック用データを足す
+    //   console.log("vm")
+    //   // if (typeof val.List_name != 'undefined' && typeof val.valueChecker == 'undefined'){
+    //   if (typeof val.List_name != 'undefined'){
+    //     this.$set(val, 'valueChecker', false);
+    //   }
+    //   console.log(val)
+    // }
   },
+  // computed: {
+  //   List_name: {
+  //     get () {
+  //       return this.$store.state.obj.message
+  //     },
+  //     set (value) {
+  //       this.$store.commit('updateMessage', value)
+  //     }
+  //   }
+  // },
   methods: {
     // `click`イベントを発行
     task_decompress () {
       this.$emit('task_decompress')
     },
-    doEditArray1(list) {
-      this.$set(list, 'valueChecker', true)
-      console.log(list.valueChecker)
+    edit_list_name(TaskGroup_index, Task_index, List_index) {
+      // console.log( {TaskGroup_index, Task_index, List_index})
+      this.$store.dispatch('editlistname',{TaskGroup_index, Task_index, List_index})
     },
+    edited_list_name(e, TaskGroup_index, Task_index, List_index, list){
+      
+      var newlistname
+      var listID
+      newlistname = e.target.value
+      listID = this.$store.state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].ListId
+      if (newlistname == list.List_name) {
+        this.$store.dispatch('editedlistname',{TaskGroup_index, Task_index, List_index})
+      } else {
+        // var content
+        // content = list
+        // content.List_name = newlistname
+        this.$store.dispatch('changelistname',{TaskGroup_index, Task_index, List_index, listID, newlistname})
+      }
+    }
   }
 }
 </script>
