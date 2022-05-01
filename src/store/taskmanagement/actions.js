@@ -10,18 +10,18 @@ export default {
     console.log(Task)
     console.log(commit)
     console.log(state)
-
-    // var new_content = 
-    // {
-
-    // }
-
-    // return Task.add(state.auth.token, { list, description, name })
-    //   .then((task) => {
-    //     commit(types.ADD_TASK, task)
-    //   })
-    //   .catch(err => { throw err })
   },
+
+  addlist:({dispatch,state}, TaskId) => {
+    return List.addlist(state.auth.token, TaskId)
+    .then(() => {
+      dispatch('fetchLists')
+      // commit(types.EDITLISTNAME, {TaskGroup_index, Task_index, List_index})
+    })
+    .catch(err => { throw err })
+  },
+
+
 
   editlistname:({commit}, {TaskGroup_index, Task_index, List_index}) => {
     commit(types.EDITLISTNAME, {TaskGroup_index, Task_index, List_index})
@@ -62,21 +62,25 @@ export default {
     return List.fetch(state.auth.token)
       .then((response) => {
         // Group及びTaskに表示、非表示をコントロールするshowを追加
-        for (let i = 0; i < response.lists.length; i++){
-
-          for (let j = 0; j < response.lists[i].Task.length; j++){
-            for (let k = 0; k < response.lists[i].Task[j].List.length; k++){
-              // Listへedit_listnameを追加
-              response.lists[i].Task[j].List[k].List_edit_listname=false
+        if( response.lists != null){
+          for (let i = 0; i < response.lists.length; i++){
+            if( response.lists[i].Task != null){
+              for (let j = 0; j < response.lists[i].Task.length; j++){
+                if (response.lists[i].Task[j].List != null){
+                  for (let k = 0; k < response.lists[i].Task[j].List.length; k++){
+                    // Listへedit_listnameを追加
+                    response.lists[i].Task[j].List[k].List_edit_listname=false
+                  }
+                }
+                // Taskへshowを追加
+                response.lists[i].Task[j].Task_show_list=true
+              }
             }
-            // Taskへshowを追加
-            response.lists[i].Task[j].Task_show_list=true
+            // Groupへshowを追加
+            response.lists[i].TaskGroup_show_task=true
           }
-          // Groupへshowを追加
-          response.lists[i].TaskGroup_show_task=true
         }
         console.log(response.lists)
-
         commit(types.FETCH_ALL_TASKLIST, response.lists)
       })
       .catch(err => { throw err })

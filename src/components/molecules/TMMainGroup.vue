@@ -59,9 +59,6 @@ export default {
   methods: {
     // `click`イベントを発行
     task_decompress (Task_index, TaskGroup_index) {
-      console.log(Task_index)
-      console.log(TaskGroup_index)
-
       this.$store.dispatch('showlists',{Task_index,TaskGroup_index})
     },
     taskgroup_decompress () {

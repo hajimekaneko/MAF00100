@@ -4,6 +4,7 @@
       <TMMainTMP 
       :name="Task_name"
       @decompress="task_decompress"
+      @addContent="addContent(TaskGroup_index, Task_index)"
       />
       <ul v-show="Task_show_list" class="row">
         <li class="col-12"
@@ -12,7 +13,6 @@
           @click="edit_list_name(TaskGroup_index, Task_index, index)"
         >
         <TMMainList v-if="!list.List_edit_listname" v-bind:List_name="list.List_name" />
-
         <!-- <input v-else type="text" class="form-control" v-model="list.List_name"
             @blur="edited_list_name(TaskGroup_index, Task_index, index, list.List_name)" v-focus> -->
         <input v-else ref="input" type="text" class="form-control" :value="list.List_name"
@@ -96,8 +96,19 @@ export default {
   // },
   methods: {
     // `click`イベントを発行
-    task_decompress () {
+    task_decompress() {
       this.$emit('task_decompress')
+    },
+    addContent (TaskGroup_index, Task_index) {
+      let TaskId
+      let list = new Array()
+      TaskId = this.$store.state.board.lists[TaskGroup_index].Task[Task_index].TaskId
+
+      for (let i = 0; i < this.$store.state.board.lists[TaskGroup_index].Task[Task_index].List.length; i++){
+        list.push(this.$store.state.board.lists[TaskGroup_index].Task[Task_index].List[i])
+      }
+      this.$store.dispatch('addlist',TaskId)
+      
     },
     edit_list_name(TaskGroup_index, Task_index, List_index) {
       // console.log( {TaskGroup_index, Task_index, List_index})
