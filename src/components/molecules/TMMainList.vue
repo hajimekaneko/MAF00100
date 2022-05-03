@@ -1,6 +1,8 @@
 <template>
-  <div class="task-list">
-    <h6>{{ List_name }}</h6>
+  <div class="task-list row">
+    <TMIconStatus :status=List_Status class="col-1, status" @changeStatus="changeStatus" />
+
+    <div class="col list" @click="edit_list_name(List_Index)">{{ List_name }}</div>
     <!-- <TMMainTMP
       v-bind:name="List_name"
       @add="shown = true"
@@ -33,7 +35,7 @@
 </template>
 
 <script>
-// import TMMainTMP from '@/components/molecules/TMMainTMP.vue'
+import TMIconStatus from '@/components/atoms/TMIconStatus.vue'
 // import KbnTaskCard from '@/components/molecules/KbnTaskCard.vue'
 // import KbnTaskForm from '@/components/molecules/KbnTaskForm.vue'
 // import { mapState } from 'vuex'
@@ -43,6 +45,7 @@ export default {
   name: 'TMMainList',
 
   components: {
+    TMIconStatus
     // TMMainTMP,
     // KbnTaskCard,
     // KbnTaskForm,
@@ -50,10 +53,14 @@ export default {
   },
 
   props: {
-    // ListId: {
-    //   type: Number,
-    //   required: true
-    // },
+    List_Status: {
+      type: Number,
+      required: true
+    },
+    List_Index: {
+      type: Number,
+      required: true
+    }, 
     List_name: {
       type: String,
       required: true
@@ -98,6 +105,12 @@ export default {
   },
 
   methods: {
+    edit_list_name(List_Index) {
+      this.$emit('edit_list_name', List_Index)
+    },
+    changeStatus() {
+      this.$emit('changeStatus')
+    },
     // handleRemove ({ taskId, list }) {
     //   return this.$store.dispatch('removeTask', { taskId, list })
     //     .catch(err => Promise.reject(err))
@@ -129,5 +142,13 @@ export default {
 </script>
 
 <style scoped>
-
+.col, .col-1 {
+  padding:0px
+}
+.status{
+  padding:1px 5px 1px 8px 
+}
+.list{
+  padding:1px 0px
+}
 </style>

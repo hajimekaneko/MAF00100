@@ -31,7 +31,7 @@ export default {
     //     "List_created_at": "2022-04-09T14:38:44.399899+09:00",
     //     "List_updated_at": "2022-04-27T23:33:54.110394+09:00"
     // }]
-    "Task_status":1
+    "Task_status":0
   },{ headers: { 'x-kbn-token': token } })
         .then(
           // response => resolve({ lists: response.data}),

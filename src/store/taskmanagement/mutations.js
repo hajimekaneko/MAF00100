@@ -16,10 +16,8 @@ export default {
     state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_edit_listname = false
   },
   [types.CHANGELISTNAME] (state, {TaskGroup_index, Task_index, List_index, newlistname}) {
-    console.log({TaskGroup_index, Task_index, List_index, newlistname})
     state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_edit_listname = false
     state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_name = newlistname
-
   },
   
   [types.SHOWTASKS] (state, TaskGroup_index) {
@@ -27,6 +25,9 @@ export default {
   },
   [types.SHOWLISTS] (state, {Task_index, TaskGroup_index}) {
     state.board.lists[TaskGroup_index].Task[Task_index].Task_show_list=!state.board.lists[TaskGroup_index].Task[Task_index].Task_show_list
+  },
+  [types.CHANGESTATUS] (state,{nextstatus, TaskGroup_index, Task_index, List_index}) {
+    state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_status = nextstatus
   },
   [types.AUTH_LOGIN] (state, payload) {
     state.auth = payload

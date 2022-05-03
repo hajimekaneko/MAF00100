@@ -9,12 +9,14 @@
       <ul v-show="Task_show_list" class="row">
         <li class="col-12"
           v-for="(list, index) in lists"
-          :key="list.LitId"
-          @click="edit_list_name(TaskGroup_index, Task_index, index)"
+          :key="list.ListId"
         >
-        <TMMainList v-if="!list.List_edit_listname" v-bind:List_name="list.List_name" />
-        <!-- <input v-else type="text" class="form-control" v-model="list.List_name"
-            @blur="edited_list_name(TaskGroup_index, Task_index, index, list.List_name)" v-focus> -->
+        <TMMainList v-if="!list.List_edit_listname" 
+        :List_name="list.List_name" 
+        :List_Status="list.List_status"
+        :List_Index="index"
+        @edit_list_name="edit_list_name(TaskGroup_index, Task_index, index)"
+        @changeStatus="changeStatus(list.ListId, list.List_status)" />
         <input v-else ref="input" type="text" class="form-control" :value="list.List_name"
             @keyup.enter="edited_list_name($event, TaskGroup_index, Task_index, index, list)"
             @blur="edited_list_name($event, TaskGroup_index, Task_index, index, list)" v-focus>
@@ -111,11 +113,10 @@ export default {
       
     },
     edit_list_name(TaskGroup_index, Task_index, List_index) {
-      // console.log( {TaskGroup_index, Task_index, List_index})
+      console.log( {TaskGroup_index, Task_index, List_index})
       this.$store.dispatch('editlistname',{TaskGroup_index, Task_index, List_index})
     },
     edited_list_name(e, TaskGroup_index, Task_index, List_index, list){
-      
       var newlistname
       var listID
       newlistname = e.target.value
@@ -126,8 +127,11 @@ export default {
         // var content
         // content = list
         // content.List_name = newlistname
-        this.$store.dispatch('changelistname',{TaskGroup_index, Task_index, List_index, listID, newlistname})
+        this.$store.dispatch('changelistname',{listID, newlistname})
       }
+    },
+    changeStatus(List_Id, List_Status) {
+      this.$store.dispatch('changestatus',{List_Id, List_Status})
     }
   }
 }
@@ -139,6 +143,9 @@ export default {
 }
 .col{
   padding:0px
+}
+.form-control{
+  height:28px
 }
 ul {
   display: flex;

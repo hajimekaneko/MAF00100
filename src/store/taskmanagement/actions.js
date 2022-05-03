@@ -12,16 +12,30 @@ export default {
     console.log(state)
   },
 
-  addlist:({dispatch,state}, TaskId) => {
-    return List.addlist(state.auth.token, TaskId)
+  changestatus:({dispatch, state}, {List_Id, List_Status}) => {
+    let nextstatus
+    if(List_Status ===0 || List_Status ===1){
+      nextstatus = List_Status + 1
+    } else if (List_Status ===2) {
+      nextstatus = 0 
+    } else {
+      console.log("ステータスがエラーです。")
+    }
+    console.log({List_Id, nextstatus})
+    return List.changestatus(state.auth.token, List_Id, nextstatus)
     .then(() => {
       dispatch('fetchLists')
-      // commit(types.EDITLISTNAME, {TaskGroup_index, Task_index, List_index})
     })
     .catch(err => { throw err })
   },
 
-
+  addlist:({dispatch, state}, TaskId) => {
+    return List.addlist(state.auth.token, TaskId)
+    .then(() => {
+      dispatch('fetchLists')
+    })
+    .catch(err => { throw err })
+  },
 
   editlistname:({commit}, {TaskGroup_index, Task_index, List_index}) => {
     commit(types.EDITLISTNAME, {TaskGroup_index, Task_index, List_index})
@@ -29,10 +43,10 @@ export default {
   editedlistname:({commit}, {TaskGroup_index, Task_index, List_index}) => {
     commit(types.EDITEDLISTNAME, {TaskGroup_index, Task_index, List_index})
   },
-  changelistname:({commit, state}, {TaskGroup_index, Task_index, List_index, listID, newlistname}) => {
+  changelistname:({dispatch, state}, {listID, newlistname}) => {
     return List.changename(state.auth.token, listID, newlistname)
     .then(() => {
-      commit(types.CHANGELISTNAME, {TaskGroup_index, Task_index, List_index, newlistname})
+      dispatch('fetchLists')
     })
     .catch(err => { throw err })
   },
