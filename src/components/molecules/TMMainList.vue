@@ -1,41 +1,15 @@
 <template>
   <div class="task-list row">
-    <TMIconStatus :status=List_Status class="col-1, status" @changeStatus="changeStatus" />
-
-    <div class="col list" @click="edit_list_name(List_Index)">{{ List_name }}</div>
-    <!-- <TMMainTMP
-      v-bind:name="List_name"
-      @add="shown = true"
-    /> -->
-    <!-- <ul class="task-list-items"> -->
-      <!-- <draggable
-        v-model="draggableItems"
-        :options="{ group: 'items' }"
-        @change="handleChange"
-        @end="handleEnd"
-      >
-        <li
-          v-for="task in draggableItems"
-          :key="task.taskId"
-        >
-        
-          <KbnTaskCard
-            v-bind="task"
-            @remove="handleRemove"
-          />
-        </li>
-      </draggable> -->
-    <!-- </ul> -->
-    <!-- <KbnTaskForm
-      v-if="shown"
-      :list="list"
-      @close="shown = false"
-    /> -->
+    <TMIconStatus :status=List_Status class="col-1, status" @changeStatus="changeStatus($event)" />
+    <div class="col list" @click="edit_list_name">{{ List_name }}</div>
+    <TMListDetail @changeStatus=changeStatus($event) :List_name="List_name" :List_Status="List_Status" />
   </div>
 </template>
 
 <script>
 import TMIconStatus from '@/components/atoms/TMIconStatus.vue'
+import TMListDetail from '@/components/molecules/TMListDetail.vue'
+
 // import KbnTaskCard from '@/components/molecules/KbnTaskCard.vue'
 // import KbnTaskForm from '@/components/molecules/KbnTaskForm.vue'
 // import { mapState } from 'vuex'
@@ -45,13 +19,13 @@ export default {
   name: 'TMMainList',
 
   components: {
-    TMIconStatus
+    TMIconStatus,
+    TMListDetail,
     // TMMainTMP,
     // KbnTaskCard,
     // KbnTaskForm,
     // draggable
   },
-
   props: {
     List_Status: {
       type: Number,
@@ -65,23 +39,12 @@ export default {
       type: String,
       required: true
     }, 
-    // tasks: {
-    //   type: Array,
-    //   default: () => []
-    // },
-    // list: {
-    //   type: Array,
-    //   default: () => []
-    // },
-    // tolist: {
-    //   type: Array,
-    //   default: () => []
-    // },
   },
 
   data () {
     return {
       shown: false,
+      showContent: false
     }
   },
 
@@ -105,12 +68,12 @@ export default {
   },
 
   methods: {
-    edit_list_name(List_Index) {
-      this.$emit('edit_list_name', List_Index)
+    edit_list_name() {
+      this.$emit('edit_list_name')
     },
-    changeStatus() {
-      this.$emit('changeStatus')
-    },
+    changeStatus(status) {
+      this.$emit('changeStatus', status)
+    }
     // handleRemove ({ taskId, list }) {
     //   return this.$store.dispatch('removeTask', { taskId, list })
     //     .catch(err => Promise.reject(err))
@@ -150,5 +113,29 @@ export default {
 }
 .list{
   padding:1px 0px
+}
+#overlay{
+  /*要素を重ねた時の順番*/
+  z-index:1;
+  /*画面全体を覆う設定*/
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.5);
+  /*画面の中央に要素を表示させる設定*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#content{
+  z-index:2;
+  width:50%;
+  padding: 1em;
+  background:#fff;
+}
+.modal_header, .modal_footer{
+  text-align: right;
 }
 </style>

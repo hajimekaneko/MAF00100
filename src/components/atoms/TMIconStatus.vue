@@ -22,8 +22,8 @@ export default {
     }
   },
   methods: {
-    changeStatus() {
-      this.$emit('changeStatus')
+    changeStatus(e, status=99) {
+      this.$emit('changeStatus',status)
     }
   }
 }

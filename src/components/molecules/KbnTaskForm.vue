@@ -42,6 +42,7 @@
         {{ error }}
       </p>
     </div>
+    
   </form>
 </template>
 

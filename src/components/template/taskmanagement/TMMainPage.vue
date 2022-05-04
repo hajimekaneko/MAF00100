@@ -13,6 +13,8 @@
       :task_groups="task_groups"
       @taskgroup_addTask="taskgroup_addTask"
       />
+
+
       <p
         v-if="progress"
         class="progress"

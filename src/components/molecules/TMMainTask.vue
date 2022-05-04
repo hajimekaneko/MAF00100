@@ -16,7 +16,7 @@
         :List_Status="list.List_status"
         :List_Index="index"
         @edit_list_name="edit_list_name(TaskGroup_index, Task_index, index)"
-        @changeStatus="changeStatus(list.ListId, list.List_status)" />
+        @changeStatus="changeStatus($event, list.ListId, list.List_status)" />
         <input v-else ref="input" type="text" class="form-control" :value="list.List_name"
             @keyup.enter="edited_list_name($event, TaskGroup_index, Task_index, index, list)"
             @blur="edited_list_name($event, TaskGroup_index, Task_index, index, list)" v-focus>
@@ -130,8 +130,8 @@ export default {
         this.$store.dispatch('changelistname',{listID, newlistname})
       }
     },
-    changeStatus(List_Id, List_Status) {
-      this.$store.dispatch('changestatus',{List_Id, List_Status})
+    changeStatus(status, List_Id, List_Status) {
+      this.$store.dispatch('changestatus',{status, List_Id, List_Status})
     }
   }
 }

@@ -12,16 +12,21 @@ export default {
     console.log(state)
   },
 
-  changestatus:({dispatch, state}, {List_Id, List_Status}) => {
+  changestatus:({dispatch, state}, {status, List_Id, List_Status}) => {
     let nextstatus
-    if(List_Status ===0 || List_Status ===1){
-      nextstatus = List_Status + 1
-    } else if (List_Status ===2) {
-      nextstatus = 0 
+    if(status===99){
+      if(List_Status ===0 || List_Status ===1){
+        nextstatus = List_Status + 1
+      } else if (List_Status ===2) {
+        nextstatus = 0 
+      } else {
+        console.log("ステータスがエラーです。")
+      }
+      console.log({List_Id, nextstatus})
     } else {
-      console.log("ステータスがエラーです。")
+      nextstatus = status
     }
-    console.log({List_Id, nextstatus})
+    console.log(nextstatus)
     return List.changestatus(state.auth.token, List_Id, nextstatus)
     .then(() => {
       dispatch('fetchLists')

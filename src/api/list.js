@@ -25,7 +25,7 @@ export default {
   },
   addlist: (token,TaskId) => {
     return new Promise((resolve, reject) => {
-      client.post('/taskmanagement/lists/',{ "Task": TaskId, "List_name": "newList" }, { headers: { 'x-kbn-token': token } })
+      client.post('/taskmanagement/lists/',{ "Task": TaskId, "List_name": "newList", "List_status":0 }, { headers: { 'x-kbn-token': token } })
         .then(
           response => resolve({ lists: response.data}),
         )
