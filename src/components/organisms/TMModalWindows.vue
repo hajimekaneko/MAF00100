@@ -1,9 +1,9 @@
 <template>
     <div id="overlay" @click="closeModal">
-        <div id="content-window" @click="stopEvent">
+        <div id="content-window" class="container" @click="stopEvent">
             <slot name="header">
             </slot>
-            <div class="row content-main"><slot/></div>
+            <slot/>
             <slot name="footer">
             </slot>
         </div>
@@ -29,15 +29,6 @@
             },
             stopEvent: function(event){
                 event.stopPropagation()
-            },
-            doSend() {
-            if (this.message.length > 0) {
-                alert(this.message)
-                this.message = ''
-                this.closeModal()
-            } else {
-                alert('メッセージを入力してください')
-            }
             }
         },
     }

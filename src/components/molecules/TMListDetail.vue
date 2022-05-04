@@ -7,18 +7,27 @@
     </div>  
     <TMModalWindows v-show="showContent" @closeModal="closeModal">
       <template slot="header">
-        <div class="modal_header">
-          <fa-icon class="btn" @click="changeStatus(0)" :icon="['far', 'square']" size="lg"></fa-icon>
-          <fa-icon class="btn" @click="changeStatus(1)" :icon="['far', 'square-minus']" size="lg"></fa-icon>
-          <fa-icon class="btn" @click="changeStatus(2)" :icon="['far', 'square-check']" size="lg"></fa-icon>
-          <fa-icon class="btn" @click="closeModal" icon="xmark" size="lg"></fa-icon>
+        <div class="modal_header row">
+          <TMIconStatus :status=List_Status class="List_Status" @changeStatus="changeStatus" />
+          <input ref="input_listname" type="text" class="modal_listname form-control" :value="List_name"> 
+          <div class="fix_btns d-flex">
+            <fa-icon class="btn" @click="changeStatus(0)" :icon="['far', 'square']" size="lg"></fa-icon>
+            <fa-icon class="btn" @click="changeStatus(1)" :icon="['far', 'square-minus']" size="lg"></fa-icon>
+            <fa-icon class="btn" @click="changeStatus(2)" :icon="['far', 'square-check']" size="lg"></fa-icon>
+            <fa-icon class="btn" @click="closeModal" icon="xmark" size="lg"></fa-icon>
+          </div>
         </div> 
       </template>
-      <TMIconStatus :status=List_Status class="col-1, status" @changeStatus="changeStatus" />
-      <div class="col list">
-          {{List_name}}
+      <div class="modal_main row">
+        <div class="memo col-auto d-flex align-items-center">
+          Memo：
+        </div>
+        <div class="col list">
+          <input ref="modal_memo" type="text" class="form-control" :value="List_Memo"> 
+        </div>
       </div>
-    </TMModalWindows>
+
+  </TMModalWindows>
   </div>
 </template>
 
@@ -48,31 +57,27 @@ export default {
       type: Number,
       required: true
     },
+    List_Memo: {
+      type: String,
+      required: true
+    },
   },
   methods: {
     openModal: function(){
       this.showContent = true
-      console.log(this.showContent)
+      this.$nextTick(() => this.$refs.modal_memo.focus())      
     },
     closeModal: function(){
-      console.log(this.showContent)
       this.showContent = false
     },
     changeStatus(status) {
       this.$emit('changeStatus',status)
-      this.closeModal()
-    },
-    doSend() {
-      if (this.message.length > 0) {
-        alert(this.message)
-        this.message = ''
+      // 上のボタンでのみクローズするように変更
+      if(status!=99){
         this.closeModal()
-      } else {
-        alert('メッセージを入力してください')
       }
     }
   },
-
 }
 </script>
 
@@ -98,8 +103,10 @@ export default {
   padding: 1em;
   background:#fff;
 }
-.col, .col-1 {
-  padding:0px
+.List_Status, .memo {
+  padding-left:0px;
+  padding-right: 5px
+
 }
 .status{
   padding:1px 5px 1px 8px 
@@ -110,13 +117,25 @@ export default {
 .btn{
   padding:5px
 }
-.modal_header, .modal_footer{
-  text-align: right;
-}
 .tm-button-text {
   border: none;
   margin-right: 5px;
   padding-left: 5px;
+}
+.modal_listname{
+  width:60%;
+  height:1.5em;
+}
+.modal_header{
+  margin:0px;  
+}
+.modal_main{
+  margin:0px;
+  padding-top:10px
+
+}
+.fix_btns{
+margin-left: auto
 }
 </style>
 

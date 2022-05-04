@@ -10,13 +10,13 @@ export default {
     console.log(Task_index)
   },
   [types.EDITLISTNAME] (state, {TaskGroup_index, Task_index, List_index}) {
-    state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_edit_listname = true
+    state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_edit_listname_flg = true
   },
   [types.EDITEDLISTNAME] (state, {TaskGroup_index, Task_index, List_index}) {
-    state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_edit_listname = false
+    state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_edit_listname_flg = false
   },
   [types.CHANGELISTNAME] (state, {TaskGroup_index, Task_index, List_index, newlistname}) {
-    state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_edit_listname = false
+    state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_edit_listname_flg = false
     state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_name = newlistname
   },
   

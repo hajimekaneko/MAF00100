@@ -53,7 +53,7 @@ export default {
     return {
       progress: false,
       message: '',
-      addContent: true
+      addContent: false
     }
   },
 

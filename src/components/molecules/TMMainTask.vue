@@ -11,15 +11,15 @@
           v-for="(list, index) in lists"
           :key="list.ListId"
         >
-        <TMMainList v-if="!list.List_edit_listname" 
+        <TMMainList 
+        :List_edit_listname_flg="list.List_edit_listname_flg" 
         :List_name="list.List_name" 
         :List_Status="list.List_status"
+        :List_Memo="list.List_memo"
         :List_Index="index"
         @edit_list_name="edit_list_name(TaskGroup_index, Task_index, index)"
-        @changeStatus="changeStatus($event, list.ListId, list.List_status)" />
-        <input v-else ref="input" type="text" class="form-control" :value="list.List_name"
-            @keyup.enter="edited_list_name($event, TaskGroup_index, Task_index, index, list)"
-            @blur="edited_list_name($event, TaskGroup_index, Task_index, index, list)" v-focus>
+        @changeStatus="changeStatus($event, list.ListId, list.List_status)"
+        @edited_list_name="edited_list_name($event, TaskGroup_index, Task_index, index, list)" />
         </li>
       </ul>
     </div>
@@ -66,14 +66,6 @@ export default {
       required: true
     }
   },
-  directives: {
-    focus: {
-        // ディレクティブ定義
-        inserted: function (el) {
-            el.focus();
-        }
-    }
-  },
   created: function () {
     // for(let i = 0; i < this.lists.length; i++){
     //   var val = this.lists[i];
@@ -113,13 +105,10 @@ export default {
       
     },
     edit_list_name(TaskGroup_index, Task_index, List_index) {
-      console.log( {TaskGroup_index, Task_index, List_index})
       this.$store.dispatch('editlistname',{TaskGroup_index, Task_index, List_index})
     },
-    edited_list_name(e, TaskGroup_index, Task_index, List_index, list){
-      var newlistname
+    edited_list_name(newlistname, TaskGroup_index, Task_index, List_index, list){
       var listID
-      newlistname = e.target.value
       listID = this.$store.state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].ListId
       if (newlistname == list.List_name) {
         this.$store.dispatch('editedlistname',{TaskGroup_index, Task_index, List_index})

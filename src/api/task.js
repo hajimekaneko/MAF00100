@@ -5,7 +5,6 @@ export default {
     return new Promise((resolve, reject) => {
       console.log({TaskId, content})
 
-      console.log(content)
       client.patch(`/taskmanagement/tasks/${TaskId}/`, {
     //     'List': [{
     //     "ListId": 2,

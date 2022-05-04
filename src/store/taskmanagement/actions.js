@@ -22,11 +22,9 @@ export default {
       } else {
         console.log("ステータスがエラーです。")
       }
-      console.log({List_Id, nextstatus})
     } else {
       nextstatus = status
     }
-    console.log(nextstatus)
     return List.changestatus(state.auth.token, List_Id, nextstatus)
     .then(() => {
       dispatch('fetchLists')
@@ -88,7 +86,7 @@ export default {
                 if (response.lists[i].Task[j].List != null){
                   for (let k = 0; k < response.lists[i].Task[j].List.length; k++){
                     // Listへedit_listnameを追加
-                    response.lists[i].Task[j].List[k].List_edit_listname=false
+                    response.lists[i].Task[j].List[k].List_edit_listname_flg=false
                   }
                 }
                 // Taskへshowを追加

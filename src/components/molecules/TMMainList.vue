@@ -1,9 +1,19 @@
 <template>
-  <div class="task-list row">
+<div>
+  <div v-if="!List_edit_listname_flg"  class="task-list row">
     <TMIconStatus :status=List_Status class="col-1, status" @changeStatus="changeStatus($event)" />
     <div class="col list" @click="edit_list_name">{{ List_name }}</div>
-    <TMListDetail @changeStatus=changeStatus($event) :List_name="List_name" :List_Status="List_Status" />
+    <TMListDetail @changeStatus=changeStatus($event) 
+    :List_name="List_name" 
+    :List_Status="List_Status"
+    :List_Memo="List_Memo"
+    />
   </div>
+  <input v-else ref="input" type="text" class="form-control" :value="List_name"
+    @keyup.enter="edited_list_name($event)"
+    @blur="edited_list_name($event)" v-focus> 
+</div>
+
 </template>
 
 <script>
@@ -26,6 +36,14 @@ export default {
     // KbnTaskForm,
     // draggable
   },
+  directives: {
+    focus: {
+        // ディレクティブ定義
+        inserted: function (el) {
+            el.focus();
+        }
+    }
+  },
   props: {
     List_Status: {
       type: Number,
@@ -38,7 +56,15 @@ export default {
     List_name: {
       type: String,
       required: true
-    }, 
+    },
+    List_edit_listname_flg: {
+      type: Boolean,
+      required: true
+    },
+    List_Memo: {
+      type: String,
+      required: true
+    },
   },
 
   data () {
@@ -49,22 +75,7 @@ export default {
   },
 
   computed: {
-    // draggableItems: {
-    //   get () { 
-    //     return this.tasks 
-    //     },
-    //   set () {
-    //     // console.log(value)
-    //     // NOTE:
-    //     //  本来なら、Vue.Draggrableから処理されたデータをitemsに反映すれば可能だが、
-    //     //  フロントエンドとバックエンドの状態を整合とるために、ここでは何もしない。
-    //   },
-    // },
-    // ...mapState({
-    //   canMove: state => state.dragging.target !== null &&
-    //     state.dragging.from !== null &&
-    //     state.dragging.to !== null
-    // })
+
   },
 
   methods: {
@@ -73,6 +84,11 @@ export default {
     },
     changeStatus(status) {
       this.$emit('changeStatus', status)
+    },
+    edited_list_name(e) {
+      var newlistname
+      newlistname = e.target.value
+      this.$emit('edited_list_name',newlistname)
     }
     // handleRemove ({ taskId, list }) {
     //   return this.$store.dispatch('removeTask', { taskId, list })
