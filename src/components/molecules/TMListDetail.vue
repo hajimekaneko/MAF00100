@@ -59,7 +59,7 @@ export default {
     },
     List_Memo: {
       type: String,
-      required: true
+      required: false
     },
   },
   methods: {
@@ -71,7 +71,9 @@ export default {
       this.showContent = false
     },
     changeStatus(status) {
-      this.$emit('changeStatus',status)
+      var newmemo
+      newmemo = this.$refs.modal_memo.value
+      this.$emit('changeStatus',{status, newmemo})
       // 上のボタンでのみクローズするように変更
       if(status!=99){
         this.closeModal()

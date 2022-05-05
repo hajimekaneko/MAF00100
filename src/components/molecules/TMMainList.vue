@@ -63,7 +63,7 @@ export default {
     },
     List_Memo: {
       type: String,
-      required: true
+      required: false
     },
   },
 
@@ -82,8 +82,8 @@ export default {
     edit_list_name() {
       this.$emit('edit_list_name')
     },
-    changeStatus(status) {
-      this.$emit('changeStatus', status)
+    changeStatus(event) {
+      this.$emit('changeStatus', event )
     },
     edited_list_name(e) {
       var newlistname

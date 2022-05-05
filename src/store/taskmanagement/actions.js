@@ -32,6 +32,26 @@ export default {
     .catch(err => { throw err })
   },
 
+  changememo:({dispatch, state}, {status, newmemo, List_Id, List_Status}) => {
+    let nextstatus
+    if(status===99){
+      if(List_Status ===0 || List_Status ===1){
+        nextstatus = List_Status + 1
+      } else if (List_Status ===2) {
+        nextstatus = 0 
+      } else {
+        console.log("ステータスがエラーです。")
+      }
+    } else {
+      nextstatus = status
+    }
+    return List.changememo(state.auth.token, List_Id, nextstatus, newmemo)
+    .then(() => {
+      dispatch('fetchLists')
+    })
+    .catch(err => { throw err })
+  },
+
   addlist:({dispatch, state}, TaskId) => {
     return List.addlist(state.auth.token, TaskId)
     .then(() => {
@@ -97,7 +117,6 @@ export default {
             response.lists[i].TaskGroup_show_task=true
           }
         }
-        console.log(response.lists)
         commit(types.FETCH_ALL_TASKLIST, response.lists)
       })
       .catch(err => { throw err })
