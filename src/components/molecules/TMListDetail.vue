@@ -26,7 +26,6 @@
           <input ref="modal_memo" type="text" class="form-control" :value="List_Memo"> 
         </div>
       </div>
-
   </TMModalWindows>
   </div>
 </template>

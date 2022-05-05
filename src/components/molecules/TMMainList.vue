@@ -3,6 +3,7 @@
   <div v-if="!List_edit_listname_flg"  class="task-list row">
     <TMIconStatus :status=List_Status class="col-1, status" @changeStatus="changeStatus($event)" />
     <div class="col list" @click="edit_list_name">{{ List_name }}</div>
+    <TMIconDelete @deleteContent="openModal" />
     <TMListDetail @changeStatus=changeStatus($event) 
     :List_name="List_name" 
     :List_Status="List_Status"
@@ -12,13 +13,22 @@
   <input v-else ref="input" type="text" class="form-control" :value="List_name"
     @keyup.enter="edited_list_name($event)"
     @blur="edited_list_name($event)" v-focus> 
+  <TMModalWindowsDelete 
+  :List_name="List_name" 
+  v-show="showContent" 
+  @closeModal="closeModal"
+  @deleteContent="deleteContent">
+  </TMModalWindowsDelete>
 </div>
 
 </template>
 
 <script>
 import TMIconStatus from '@/components/atoms/TMIconStatus.vue'
+import TMIconDelete from '@/components/atoms/TMIconDelete.vue'
 import TMListDetail from '@/components/molecules/TMListDetail.vue'
+import TMModalWindowsDelete from '@/components/organisms/TMModalWindowsDelete.vue'
+
 
 // import KbnTaskCard from '@/components/molecules/KbnTaskCard.vue'
 // import KbnTaskForm from '@/components/molecules/KbnTaskForm.vue'
@@ -30,7 +40,9 @@ export default {
 
   components: {
     TMIconStatus,
+    TMIconDelete,
     TMListDetail,
+    TMModalWindowsDelete,
     // TMMainTMP,
     // KbnTaskCard,
     // KbnTaskForm,
@@ -89,7 +101,17 @@ export default {
       var newlistname
       newlistname = e.target.value
       this.$emit('edited_list_name',newlistname)
-    }
+    },
+    closeModal: function(){
+      this.showContent = false
+    },
+    openModal(){
+      // confirm('削除してよろしいですか?')
+      this.showContent = true
+    },
+    deleteContent(){
+      this.$emit('deleteContent')
+    },
     // handleRemove ({ taskId, list }) {
     //   return this.$store.dispatch('removeTask', { taskId, list })
     //     .catch(err => Promise.reject(err))

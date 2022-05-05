@@ -19,7 +19,8 @@
         :List_Index="index"
         @edit_list_name="edit_list_name(TaskGroup_index, Task_index, index)"
         @changeStatus="changeStatus($event, list.ListId, list.List_status, TaskGroup_index, Task_index, index)"
-        @edited_list_name="edited_list_name($event, TaskGroup_index, Task_index, index, list)" />
+        @edited_list_name="edited_list_name($event, TaskGroup_index, Task_index, index, list)"
+        @deleteContent="deleteContent(TaskGroup_index, Task_index, index)" />
         </li>
       </ul>
     </div>
@@ -128,7 +129,11 @@ export default {
       } else {
         this.$store.dispatch('changememo',{status, newmemo, List_Id, List_Status})
       }
-      
+    },
+    deleteContent(TaskGroup_index, Task_index, List_index){
+      var listID
+      listID = this.$store.state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].ListId
+      this.$store.dispatch('deletelist',listID)
     }
   }
 }

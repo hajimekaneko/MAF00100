@@ -68,5 +68,16 @@ export default {
           reject(new Error(err.response.data.message || err.message))
         })
     })
-  }
+  },
+  deletelist: (token, listID) => {
+    return new Promise((resolve, reject) => {
+      client.delete(`/taskmanagement/lists/${listID}/`,{ headers: { 'x-kbn-token': token } })
+        .then(
+          response => resolve({ lists: response.data}),
+        )
+        .catch(err => {
+          reject(new Error(err.response.data.message || err.message))
+        })
+    })
+  },
 }

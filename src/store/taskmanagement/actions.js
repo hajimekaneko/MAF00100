@@ -81,6 +81,13 @@ export default {
   showlists:({commit}, {Task_index, TaskGroup_index}) => {
     commit(types.SHOWLISTS, {Task_index, TaskGroup_index})
   },
+  deletelist:({dispatch, state}, listID) => {
+    return List.deletelist(state.auth.token, listID)
+    .then(() => {
+      dispatch('fetchLists')
+    })
+    .catch(err => { throw err })
+  },
 
 
   login: ({ commit }, authInfo) => {

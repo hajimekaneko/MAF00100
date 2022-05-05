@@ -4,14 +4,13 @@
     type="button"
     @click="handleClick"
   >
-  <fa-icon icon="circle-plus" size="lg"></fa-icon>
-    <slot />
+  <fa-icon icon="trash-can"></fa-icon>
   </button>
 </template>
 
 <script>
 export default {
-  name: 'TMIconAdd',
+  name: 'TMIconDelete',
 
   props: {
   },
@@ -22,7 +21,7 @@ export default {
   methods: {
     // `click`イベントを発行
     handleClick () {
-      this.$emit('addContent')
+      this.$emit('deleteContent')
     }
   }
 }
