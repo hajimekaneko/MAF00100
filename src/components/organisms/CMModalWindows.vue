@@ -12,7 +12,7 @@
 
 <script>
     export default {
-        name: 'TMModalWindows',
+        name: 'CMModalWindows',
         data() {
             return {
                 modal: false,

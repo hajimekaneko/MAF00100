@@ -3,11 +3,16 @@
     <div class="col px-2">
     <TMMainTMP 
     :name="TaskGroup_name"
+    :edit_content_flg="TaskGroup_edit_taskgroupname_flg"
+    :content_status="TaskGroup_status"
     @decompress="taskgroup_decompress"
     @addContent="taskgroup_addTask"
+    @edit_content_name="edit_taskgroup_name(TaskGroup_index)"
+    @changeStatus="changeTaskGroupStatus($event)"
+    
     />
 
-    <ul v-show="TaskGroup_show_task" class="row mx-0 my-2">
+    <ul v-show="TaskGroup_show_task" class="row mx-2 my-2">
       <li class="col-12  my-1"
         v-for="(task, Task_index) in tasks"
         :key="task.TaskId"
@@ -18,7 +23,10 @@
       :Task_show_list="task.Task_show_list"
       :Task_index="Task_index"
       :TaskGroup_index="TaskGroup_index"
+      :Task_edit_taskname_flg="task.Task_edit_taskname_flg"
+      :Task_status="task.Task_status"
       @task_decompress="task_decompress(Task_index, TaskGroup_index)"
+      @changeTaskStatus="changeTaskStatus($event, task.TaskId, task.Task_status)"
       />
       </li>
     </ul>
@@ -54,7 +62,15 @@ export default {
     TaskGroup_index: {
       type: Number,
       required: true
-    }
+    },
+    TaskGroup_status: {
+      type: Number,
+      required: true
+    },
+    TaskGroup_edit_taskgroupname_flg: {
+      type: Boolean,
+      required: true
+    },
   },
   methods: {
     // `click`イベントを発行
@@ -66,7 +82,20 @@ export default {
     },
     taskgroup_addTask(){
       this.$emit('taskgroup_addTask')
-    }
+    },
+    edit_taskgroup_name(TaskGroup_index){
+      console.log("edit_content_name")
+      this.$store.dispatch('edittaskgroupname',{TaskGroup_index})
+    },
+    changeTaskStatus(event, TaskId, Task_Status){
+      var status
+      status = event.status
+      this.$store.dispatch('changetaskstatus',{status, TaskId, Task_Status})
+    },
+    changeTaskGroupStatus(event) {
+      this.$emit('changeTaskGroupStatus', event )
+    },
+
 
   }
 }

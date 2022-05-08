@@ -3,8 +3,12 @@
     <div class="col">
       <TMMainTMP 
       :name="Task_name"
+      :edit_content_flg="Task_edit_taskname_flg"
+      :content_status="Task_status"
       @decompress="task_decompress"
       @addContent="addContent(TaskGroup_index, Task_index)"
+      @edit_content_name="edit_task_name(TaskGroup_index, Task_index)"
+      @changeStatus="changeTaskStatus($event)"
       />
       <ul v-show="Task_show_list" class="row">
         <li class="col-12"
@@ -18,7 +22,7 @@
         :List_Memo="list.List_memo"
         :List_Index="index"
         @edit_list_name="edit_list_name(TaskGroup_index, Task_index, index)"
-        @changeStatus="changeStatus($event, list.ListId, list.List_status, TaskGroup_index, Task_index, index)"
+        @changeStatus="changeListStatus($event, list.ListId, list.List_status, TaskGroup_index, Task_index, index)"
         @edited_list_name="edited_list_name($event, TaskGroup_index, Task_index, index, list)"
         @deleteContent="deleteContent(TaskGroup_index, Task_index, index)" />
         </li>
@@ -65,7 +69,15 @@ export default {
     Task_index: {
       type: Number,
       required: true
-    }
+    },
+    Task_edit_taskname_flg: {
+      type: Boolean,
+      required: true
+    },
+    Task_status: {
+      type: Number,
+      required: true
+    },
   },
   created: function () {
     // for(let i = 0; i < this.lists.length; i++){
@@ -96,16 +108,17 @@ export default {
     },
     addContent (TaskGroup_index, Task_index) {
       let TaskId
-      let list = new Array()
+      // let list = new Array()
       TaskId = this.$store.state.board.lists[TaskGroup_index].Task[Task_index].TaskId
 
-      for (let i = 0; i < this.$store.state.board.lists[TaskGroup_index].Task[Task_index].List.length; i++){
-        list.push(this.$store.state.board.lists[TaskGroup_index].Task[Task_index].List[i])
-      }
+      // for (let i = 0; i < this.$store.state.board.lists[TaskGroup_index].Task[Task_index].List.length; i++){
+      //   list.push(this.$store.state.board.lists[TaskGroup_index].Task[Task_index].List[i])
+      // }
       this.$store.dispatch('addlist',TaskId)
       
     },
     edit_list_name(TaskGroup_index, Task_index, List_index) {
+      // console.log(TaskGroup_index, Task_index, List_index)
       this.$store.dispatch('editlistname',{TaskGroup_index, Task_index, List_index})
     },
     edited_list_name(newlistname, TaskGroup_index, Task_index, List_index, list){
@@ -117,18 +130,27 @@ export default {
         this.$store.dispatch('changelistname',{listID, newlistname})
       }
     },
-    changeStatus(event, List_Id, List_Status, TaskGroup_index, Task_index, List_index) {
+    edit_task_name(TaskGroup_index, Task_index) {
+      this.$store.dispatch('edittaskname',{TaskGroup_index, Task_index})
+    },
+    changeListStatus(event, List_Id, List_Status, TaskGroup_index, Task_index, List_index) {
       var status
       var newmemo
       var memo
       status = event.status
       newmemo = event.newmemo
-      memo = this.$store.state.board.lists[TaskGroup_index].Task[Task_index].List[List_index]
-      if (memo === newmemo){
-        this.$store.dispatch('changestatus',{status, List_Id, List_Status})
+      memo = this.$store.state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_memo
+      console.log(memo, newmemo)
+      if (newmemo === undefined || memo === newmemo){
+        console.log(status, List_Id, List_Status)
+        this.$store.dispatch('changeliststatus',{status, List_Id, List_Status})
       } else {
+        console.log('changememo')
         this.$store.dispatch('changememo',{status, newmemo, List_Id, List_Status})
       }
+    },
+    changeTaskStatus(event) {
+      this.$emit('changeTaskStatus', event )
     },
     deleteContent(TaskGroup_index, Task_index, List_index){
       var listID
@@ -161,5 +183,8 @@ ul li {
   /* margin-right: 8px; */
   border: thin solid black;
   border-radius: 0.5em;
+}
+.col-12 {
+  padding:0px
 }
 </style>

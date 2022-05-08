@@ -1,18 +1,24 @@
 <template>
 <div>
-  <div v-if="!List_edit_listname_flg"  class="task-list row">
-    <TMIconStatus :status=List_Status class="col-1, status" @changeStatus="changeStatus($event)" />
-    <div class="col list" @click="edit_list_name">{{ List_name }}</div>
-    <TMIconDelete @deleteContent="openModal" />
-    <TMListDetail @changeStatus=changeStatus($event) 
-    :List_name="List_name" 
-    :List_Status="List_Status"
-    :List_Memo="List_Memo"
-    />
-  </div>
-  <input v-else ref="input" type="text" class="form-control" :value="List_name"
-    @keyup.enter="edited_list_name($event)"
-    @blur="edited_list_name($event)" v-focus> 
+  <CMToInputFiled 
+  :content_name="List_name"
+  :edit_content_flg="List_edit_listname_flg"
+  @edit_content_name="edit_list_name"
+  @edited_content_name="edited_list_name($event)"
+  >
+    <template slot="top">
+      <TMIconStatus :status=List_Status class="status" @changeStatus="changeStatus($event)" />
+    </template>
+    <template slot="end">
+      
+      <TMIconDelete @deleteContent="openModal" />
+      <TMListDetail @changeStatus=changeStatus($event) 
+      :List_name="List_name" 
+      :List_Status="List_Status"
+      :List_Memo="List_Memo"
+      />
+    </template>
+   </CMToInputFiled>
   <TMModalWindowsDelete 
   :List_name="List_name" 
   v-show="showContent" 
@@ -28,12 +34,10 @@ import TMIconStatus from '@/components/atoms/TMIconStatus.vue'
 import TMIconDelete from '@/components/atoms/TMIconDelete.vue'
 import TMListDetail from '@/components/molecules/TMListDetail.vue'
 import TMModalWindowsDelete from '@/components/organisms/TMModalWindowsDelete.vue'
+import CMToInputFiled from '@/components/molecules/CMToInputFiled.vue'
 
 
-// import KbnTaskCard from '@/components/molecules/KbnTaskCard.vue'
-// import KbnTaskForm from '@/components/molecules/KbnTaskForm.vue'
-// import { mapState } from 'vuex'
-// import draggable from 'vuedraggable'
+
 
 export default {
   name: 'TMMainList',
@@ -43,10 +47,8 @@ export default {
     TMIconDelete,
     TMListDetail,
     TMModalWindowsDelete,
-    // TMMainTMP,
-    // KbnTaskCard,
-    // KbnTaskForm,
-    // draggable
+    CMToInputFiled
+
   },
   directives: {
     focus: {
@@ -97,9 +99,7 @@ export default {
     changeStatus(event) {
       this.$emit('changeStatus', event )
     },
-    edited_list_name(e) {
-      var newlistname
-      newlistname = e.target.value
+    edited_list_name(newlistname) {
       this.$emit('edited_list_name',newlistname)
     },
     closeModal: function(){
@@ -151,6 +151,11 @@ export default {
 }
 .list{
   padding:1px 0px
+}
+.tm-button {
+  border: none;
+  margin-right: 0px;
+  padding-left: 0px;
 }
 #overlay{
   /*要素を重ねた時の順番*/

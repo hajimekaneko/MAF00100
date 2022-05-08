@@ -11,8 +11,9 @@
 
       <TMMainView 
       :task_groups="task_groups"
-      @taskgroup_addTask="taskgroup_addTask"
+      @taskgroup_addTask="taskgroup_addTask($event)"
       />
+      <TMIconAdd @addContent="addTaskGroup()" />
 
 
       <p
@@ -21,12 +22,13 @@
       >
         {{ message }}
       </p>
+      {{TaskGroup_index}}
       <!-- タスク詳細モーダル表示用プレースホルダ -->
       <router-view />
       </div>
       <div class="col-4 aaa"
       v-if="addContent">
-      <TMAddTaskView      />
+      <TMAddTaskView :TaskGroup_index=TaskGroup_index />
 
       </div>
     </main>
@@ -39,11 +41,13 @@ import { mapState } from 'vuex'
 import TMNavigation from '@/components/molecules/TMNavigation.vue'
 import TMMainView from '@/components/organisms/TMMainView.vue'
 import TMAddTaskView from '@/components/organisms/TMAddTaskView.vue'
+import TMIconAdd from '@/components/atoms/TMIconAdd.vue'
 
 export default {
   name: 'TMMainPage',
 
   components: {
+    TMIconAdd,
     TMMainView,
     TMNavigation,
     TMAddTaskView
@@ -53,7 +57,8 @@ export default {
     return {
       progress: false,
       message: '',
-      addContent: false
+      addContent: false,
+      TaskGroup_index:'',
     }
   },
 
@@ -70,13 +75,22 @@ export default {
       this.progress = true
       this.message = message
     },
-    taskgroup_addTask(){
+    taskgroup_addTask(TaskGroup_index){
       this.addContent = !this.addContent
+      this.TaskGroup_index = TaskGroup_index
+      console.log(TaskGroup_index)
     },
 
     resetProgress () {
       this.progress = false
       this.message = ''
+    },
+    addTaskGroup () {
+      let UserId
+      // let list = new Array()
+      UserId = this.$store.state.board.lists[0].User
+      console.log(UserId)
+      this.$store.dispatch('addtaskgroup', UserId)
     },
 
     loadLists () {

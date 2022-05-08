@@ -1,32 +1,40 @@
 <template> 
-  <div class="row">
-    <div class="col">
-      aaaa
-    </div>
+  <div class="container">
+    <TMDetailHeader :TaskGroup="TaskGroup" /> 
+    <TMDetailMainTasks :TaskGroup="TaskGroup" /> 
   </div>
 </template>
 
 <script>
-// import TMMainGroup from '@/components/molecules/TMMainGroup.vue'
+import TMDetailHeader from '@/components/molecules/TMDetailHeader.vue'
+import TMDetailMainTasks from '@/components/molecules/TMDetailMainTasks.vue'
 
 export default {
   name: 'TMAddTaskView',
 
-  components: { 
+  components: {
+    TMDetailHeader,
+    TMDetailMainTasks
   },
   data() {
     return {
       message: '',
+      TaskGroup:[],
     }
+  },
+  props: {
+    TaskGroup_index: {
+      type: Number,
+      required: true
+    }
+  },
+  created: function () {
+    this.TaskGroup = this.$store.state.board.lists[this.TaskGroup_index]
+    console.log(this.TaskGroup)
   },
   methods: {
   },
-  props: {
-    // task_groups: {
-    //   type: Array,
-    //   default: () => []
-    // }
-  },
+
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <button
-    class="tm_button"
+    class="tm-button"
     type="button"
     @click="handleClick"
   >
@@ -29,9 +29,4 @@ export default {
 </script>
 
 <style scoped>
-.tm_button {
-  border: none;
-  padding-right: 0;
-  padding-left: 0;
-}
 </style>

@@ -1,7 +1,6 @@
 <template>
   <button
-    :class="classes"
-    :decompressed="decompressed"
+    class="tm-button"
     type="button"
     @click="handleClick(decompressed)"
   >
@@ -15,10 +14,6 @@ export default {
   name: 'TMIconBar',
 
   props: {
-    type: {
-      type: String, 
-      default: 'button'
-    },
     decompressed: {
       type: Boolean,
       default: false
@@ -27,10 +22,10 @@ export default {
 
   computed: {
     // `type`に応じてクラスを動的に生成する.
-    classes () {
-      const cls = this.type === 'text' ? ('-' + this.type) : ''
-      return [`kbn-button${cls}`]
-    }
+    // classes () {
+    //   const cls = this.type === 'text' ? ('-' + this.type) : ''
+    //   return [`kbn-button${cls}`]
+    // }
   },
 
   methods: {
@@ -43,12 +38,4 @@ export default {
 </script>
 
 <style scoped>
-.kbn-button {
-  padding: .6em 1.3em;
-}
-.kbn-button-text {
-  border: none;
-  padding-right: 0;
-  padding-left: 0;
-}
 </style>

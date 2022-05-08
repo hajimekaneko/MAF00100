@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     changeStatus(e, status=99) {
-      this.$emit('changeStatus',status)
+      this.$emit('changeStatus',{status})
     }
   }
 }

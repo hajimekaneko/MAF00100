@@ -19,7 +19,19 @@ export default {
     state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_edit_listname_flg = false
     state.board.lists[TaskGroup_index].Task[Task_index].List[List_index].List_name = newlistname
   },
-  
+  [types.EDITTASKNAME] (state, {TaskGroup_index, Task_index}) {
+    state.board.lists[TaskGroup_index].Task[Task_index].Task_edit_taskname_flg = true
+  },
+  [types.EDITEDTASKNAME] (state, {TaskGroup_index, Task_index}) {
+    state.board.lists[TaskGroup_index].Task[Task_index].Task_edit_taskname_flg = false
+  },
+  [types.EDITTASKGROUPNAME] (state, {TaskGroup_index}) {
+    state.board.lists[TaskGroup_index].TaskGroup_edit_taskgroupname_flg = true
+  },
+  [types.EDITEDTASKGROUPNAME] (state, {TaskGroup_index}) {
+    state.board.lists[TaskGroup_index].TaskGroup_edit_taskgroupname_flg = false
+  },
+
   [types.SHOWTASKS] (state, TaskGroup_index) {
     state.board.lists[TaskGroup_index].TaskGroup_show_task = !state.board.lists[TaskGroup_index].TaskGroup_show_task
   },

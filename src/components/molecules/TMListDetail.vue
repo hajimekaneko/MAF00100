@@ -1,11 +1,9 @@
 <template> 
   <div class="">
     <div class="example-modal-window">
-      <button class="tm-button-text" @click="openModal">
-         <fa-icon icon="file-pen" ></fa-icon>
-      </button>
+    <TMIconDetail @openDetail="openModal" />
     </div>  
-    <TMModalWindows v-show="showContent" @closeModal="closeModal">
+    <CMModalWindows v-show="showContent" @closeModal="closeModal">
       <template slot="header">
         <div class="modal_header row">
           <TMIconStatus :status=List_Status class="List_Status" @changeStatus="changeStatus" />
@@ -26,20 +24,22 @@
           <input ref="modal_memo" type="text" class="form-control" :value="List_Memo"> 
         </div>
       </div>
-  </TMModalWindows>
+  </CMModalWindows>
   </div>
 </template>
 
 <script>
 import TMIconStatus from '@/components/atoms/TMIconStatus.vue'
-import TMModalWindows from '@/components/organisms/TMModalWindows.vue'
+import TMIconDetail from '@/components/atoms/TMIconDetail.vue'
+import CMModalWindows from '@/components/organisms/CMModalWindows.vue'
 
 export default {
   name: 'TMListDetail',
 
   components: { 
-    TMModalWindows,
-    TMIconStatus
+    CMModalWindows,
+    TMIconStatus,
+    TMIconDetail
   },
   data() {
     return {
@@ -118,7 +118,7 @@ export default {
 .btn{
   padding:5px
 }
-.tm-button-text {
+.tm-button {
   border: none;
   margin-right: 5px;
   padding-left: 5px;

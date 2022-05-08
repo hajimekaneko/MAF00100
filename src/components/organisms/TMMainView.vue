@@ -11,8 +11,11 @@
       :TaskGroup_name="task_group.TaskGroup_name" 
       :TaskGroup_show_task="task_group.TaskGroup_show_task"
       :TaskGroup_index="TaskGroup_index"
+      :TaskGroup_status="task_group.TaskGroup_status.TaskStatus_No"
+      :TaskGroup_edit_taskgroupname_flg="task_group.TaskGroup_edit_taskgroupname_flg"
       @taskgroup_decompress="taskgroup_decompress(TaskGroup_index)"
-      @taskgroup_addTask="taskgroup_addTask(task_group.TaskGroupId, task_group.Task)"
+      @taskgroup_addTask="taskgroup_addTask(TaskGroup_index)"
+      @changeTaskGroupStatus="changeTaskGroupStatus($event, task_group.TaskGroupId, task_group.TaskGroup_status.TaskStatus_No)"
       />
       
       </li>
@@ -29,6 +32,7 @@ export default {
 
   components: {
     TMMainGroup,
+
   },
 
   // data: store.state,
@@ -50,10 +54,15 @@ export default {
     taskgroup_decompress (TaskGroup_index) {
       this.$store.dispatch('showtasks',TaskGroup_index)
     },
-    taskgroup_addTask(TaskGroupId, Task) {
-      this.$emit('taskgroup_addTask')
-      this.$store.dispatch('addTask', {TaskGroupId, Task})
-    }
+    taskgroup_addTask(TaskGroup_index) {
+      this.$emit('taskgroup_addTask', TaskGroup_index)
+    },
+    changeTaskGroupStatus(event, TaskGroupId, TaskGroup_Status){
+      console.log(event, TaskGroupId, TaskGroup_Status)
+      var status
+      status = event.status
+      this.$store.dispatch('changetaskgroupstatus',{status, TaskGroupId, TaskGroup_Status})
+    },
   }
 }
 </script>

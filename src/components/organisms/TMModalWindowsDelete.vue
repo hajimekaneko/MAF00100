@@ -1,5 +1,5 @@
 <template>
-  <TMModalWindows @closeModal="closeModal">
+  <CMModalWindows @closeModal="closeModal">
     <!-- 下記を参考に作り直す -->
     <!-- https://zukucode.com/2020/04/vue-alert-confirm.html -->
       <template slot="header">
@@ -14,16 +14,16 @@
         <button @click="closeModal" type="button" class="btn btn-info">いいえ</button>
         <button @click="deleteContent" type="button" class="btn btn-danger">削除する</button>
       </div>
-  </TMModalWindows>
+  </CMModalWindows>
 </template>
 
 <script>
-import TMModalWindows from '@/components/organisms/TMModalWindows.vue'
+import CMModalWindows from '@/components/organisms/CMModalWindows.vue'
 
     export default {
         name: 'TMModalWindowsDelete',
         components: {
-            TMModalWindows,
+            CMModalWindows,
             // TMMainTMP,
             // KbnTaskCard,
             // KbnTaskForm,
