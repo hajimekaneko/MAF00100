@@ -1,3 +1,6 @@
+
+export const SETUSRINFO = 'SETUSRINFO'
+
 export const ADDGROUP = 'ADDGROUP'
 export const EDITLISTNAME = 'EDITLISTNAME'
 export const EDITEDLISTNAME = 'EDITEDLISTNAME'

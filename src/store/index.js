@@ -4,8 +4,11 @@ import actions from '@/store/taskmanagement/actions'
 import getters from '@/store/taskmanagement/getters'
 import mutations from '@/store/taskmanagement/mutations'
 import state from '@/store/taskmanagement/state'
+import createPersistedState from 'vuex-persistedstate'
+
 
 Vue.use(Vuex)
+
 
 export default new Vuex.Store({
   // modules:{
@@ -17,6 +20,11 @@ export default new Vuex.Store({
   //     mutations,
   //   }
   // },
+  plugins: [createPersistedState({
+    key: 'vue-gauth',
+    paths: ['userInfo'],
+    storage: window.sessionStorage
+  })],
   state, // 定義したstateを`state`オプションに指定
   getters,
   actions,

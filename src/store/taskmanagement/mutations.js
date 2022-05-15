@@ -2,7 +2,9 @@ import * as types from './mutation-types'
 
 export default {
 
-
+  [types.SETUSRINFO] (state, userInfo) {
+    state.userInfo = userInfo
+  },
   
 
   [types.ADDGROUP] (state, Task_index) {

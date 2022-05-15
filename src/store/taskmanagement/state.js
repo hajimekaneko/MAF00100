@@ -1,5 +1,6 @@
 export default {
   // 状態`Auth`と状態`Board`をVuexのstateで一元管理できるよう定義する
+  userInfo: {},
   auth: { // 状態`Auth`
     token: localStorage.getItem('token'), // `token`は locale storage から取得する
     userId: null // `userId`はnullで初期化

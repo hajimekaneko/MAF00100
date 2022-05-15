@@ -66,7 +66,7 @@ export default {
   changetaskgroupstatus:({dispatch, state}, {status, TaskGroupId, TaskGroup_Status}) => {
     let nextstatus
     nextstatus = changestatus(TaskGroup_Status, status)
-    let UserId
+    let UserId  
     UserId =""
     return TaskGroup.changestatus(state.auth.token, TaskGroupId, nextstatus, UserId)
     .then(() => {

@@ -15,7 +15,7 @@ export const authorizeToken = (to, from, next) => {
       console.log("認証されていない")
       // console.log(store.state)
       next({ path: '/taskmanagement/login' })
-      next({ path: '/taskmanagement' })
+      // next({ path: '/taskmanagement' })
     } else {//認証されている
       console.log("認証されている")
       next()

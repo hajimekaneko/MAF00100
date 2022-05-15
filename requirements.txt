@@ -6,3 +6,15 @@ npm install --save @fortawesome/free-regular-svg-icons
 npm install --save lodash
 npm install --save stylus
 npm install --save stylus-loader
+npm install --save vuex-persistedstate
+npm install --save bootstrap-vue 
+
+~~~~~~~~~~~~~~~~~~~~~~
+npm install --save vue3-google-oauth2
+npm install --save vue-router 
+npm install --save vuex
+npm install vuex@3.4.0
+~~~~~~~~~~~~~~~~~~=~~~
+
+npm install firebase
+npm install --save @vue/composition-api
